@@ -1,0 +1,791 @@
+___.                 .__        
+\_ |__ _____    _____|__| ____  
+ | __ \\__  \  /  ___/  |/ ___\ 
+ | \_\ \/ __ \_\___ \|  \  \___ 
+ |___  (____  /____  >__|\___  >
+     \/     \/     \/        \/ 
+         Manual by archer (modified 17.07.2018)
+
+
+
+Changelog
+---------
+
+10.07.2018
+ - added INSTR
+ - added DIR$
+ - changed how INKEY$ works
+ - fixed POKE Syntax
+ - updated FAQ
+17.07.2018
+ - changed how INKEY$ works
+ - added POLKEY$
+
+
+1. Overview of Commands
+2. Detailed Overview of Commands
+3. How to...
+4. COMM.EXE Basic Programs
+
+
+1. Overview of Commands
+-----------------------
+
+abs       - returns the absolute value of the specified value
+atn       - returns the arctangent of the specified value
+beep      - sends a bell
+chr$      - convert an ASCII-Code to its equivalent character
+cint      - returns the nearest integer of the specified value (9.5 becomes 10)
+clear     - clears all variables and closes all open files
+close     - close the file and save it/create if it doesnt exist
+cls       - clears the screen
+color     - changes the background and/or foreground color of the terminal
+cos       - returns the cosinus of a specified value
+csng      - convert a specified value to a single precision number
+data      - store the numeric and string constants that are accessed by the program READ statements
+date$     - returns the current date
+def       - defines a function
+defdbl    - declare a variable as double precision number
+defint    - declare a variable as integer number
+defsng    - declare a variable as single precision number 
+defstr    - declare a variable as string
+dim       - define an array of a fixed size
+dir$      - returns the filenames in your local directory, separated by spaces
+end       - ends the current program
+exp       - returns the base of natural logarithms to the power of the specified value
+for       - execute a series of instructions a specified number of times in a loop
+gosub     - branch to a subroutine and return
+goto      - branch unconditionally out of the normal program sequence to the specified line number
+height    - returns your terminal height
+hex$      - returns a string which represents the hexadecimal value of the specified value
+home      - sets the cursor to the top left position of the screen
+if        - make a decision regarding program flow based on the result of a returned expression
+inkey$    - returns one character read from the terminal. it will wait till any character is being typed
+input     - shows Prompt and reads input from the users terminal and save it into a Variable
+instr     - returns the position of a substring in a string
+int       - truncate an value to a whole number
+left$     - returns a string that comprises the left-most specified number characters of a specified string
+len       - returns the number of characters in the specified string
+let       - assigns a value to a variable
+locate    - change the cursors position
+log       - returns the natural logarithm of the specified value
+log10     - returns the natural logarithm of the specified value (Base 10)
+mid$      - returns a string of l characters from String beginning with the n Character
+new       - creates a new basic program
+next      - used within for. execute a series of instructions a specified number of times in a loop
+nint      - returns the nearest integer of the specified value (9.5 becomes 9)
+oct$      - returns a octal value of a specific value
+open      - opens a file
+pclear0   - reserves one page of memory (no effect)
+pclear1   - reserves two pages of memory (no effect)
+peek      - read a value from the specified memory location
+pmode0    - selects a reosultion and first memory page of a low resolution graphic screen. (0 - 128 x 96, 2 color) (no effect)
+poke      - write a byte of data into the specified memory location
+polkey$   - returns one character read from the terminal. when no key is hit within one second, it returns an empty string
+print     - prints a expression on the screen
+r2d       - converts radians to degrees
+randomize - reseed the random number generator
+read      - read a value from DATA and assign them to variables
+rem       - explanatory remark. does not get executed by the interpreter
+restore   - allow DATA statements to be reread
+return    - return from a subroutine
+right$    - returns the rightmost Number(n) characters of the specified String
+rnd       - returns a random number between 0 and 1
+run       - execute the program in memory
+sgn       - returns the sign of the specified value
+sin       - returns the trigonometric sine of the specified value
+sleep     - pauses the program for a specified amount of seconds
+space$    - returns a string of specified Number value of spaces
+spc$      - returns a string of specified Number value of spaces
+sqr       - returns the square root of the specified value
+sqrt      - returns the square root of the specified value
+stop      - halts the program and returns to the basic interpreter
+str       - returns a string representation of the specified value
+tab       - returns the specified amount of spaces
+tab$      - returns the specified amount of spaces
+tan       - returns the trigonometric tangent of the specified value
+time$     - returns the local system time
+timer     - returns the number of seconds since midnight
+troff     - stops tracing of program statements
+tron      - starts tracing of program statements
+user$     - returns the current logged in user
+width     - returns your terminal width
+val       - returns the numerical value of the specified string value
+
+
+2. Detailed overview of Commands
+--------------------------------
+
+ ABS(n)
+ ------
+ returns the absolute value of the specified value n
+
+ PRINT ABS(-40)
+  40
+
+
+ ATN(n)
+ ------
+ returns the arctangent of the specified value n
+
+ PRINT ATN(40)
+  1.546
+
+
+ CHR$(n)
+ -------
+ convert an ASCII-Code (n) to its equivalent character
+
+ PRINT CHR$(66)
+  B
+
+
+ CINT(n)
+ -------
+ returns the nearest integer of the specified value (9.5 becomes 10)
+
+ PRINT CINT(5.7)
+  6
+
+
+ COLOR(a, b)
+ -----------
+ changes the background(b) and/or foreground(a) color of the terminal
+
+ COLOR 3, 4
+ PRINT "Hello"
+  (prints Hello with blue(b) background and yellow(a) foreground text)
+  (a List of possible Colors can be found with the command "show colors")
+
+
+ COS(n)
+ ------
+ returns the cosinus of a specified value
+
+ PRINT COS(67)
+  -0.517769799789505
+
+
+ CSNG(n)
+ -------
+ convert a specified value(n) to a single precision number
+
+ PRINT CSNG("3.45")
+  3.450
+
+
+ DATA n...
+ -----------
+ store the numeric and string constants that are accessed by the program READ statements
+
+ DATA 4.1, 5.6, 9.98
+ READ A, B, C
+ PRINT A, B, C
+  4.100          5.600          9.980
+
+
+ DEF FunctionName(Argument) = Expression
+ ---------------------------------------
+ define a function with the Name 'FunctionName' which accept an 'Argument' and returns the defined expression
+
+ DEF testFn(testArg) = TestArg + TestArg
+ RESULT = testFn(5)
+ PRINT RESULT
+  10
+
+
+ DEFDBL (variable)
+ -----------------
+ declare a variable as double precision number
+
+ DEFDBL Variable
+
+
+ DEFINT (Variable)
+ -----------------
+ declare a variable as integer number
+
+ DEFINT Variable
+
+
+ DEFSNG (Variable)
+ -----------------
+ declare a variable as single precision number 
+
+ DEFSNG Variable
+
+
+ DEFSTR (Variable)
+ -----------------
+ declare a variable as string
+
+ DEFSTR Variable
+
+
+ DIM (Variable)
+ --------------
+ define an array of a fixed size
+
+ DIM Variable(10)
+ (would define an Array with a maximum size of 10)
+
+
+ DIR$
+ ----
+ returns the filenames in your local directory, separated by spaces
+
+ PRINT DIR$
+
+
+ EXP (n)
+ -------
+ return the base of natural logarithms to the power of the specified value(n)
+
+ PRINT EXP(13)
+  442413.392
+
+
+ FOR (variable) = (startValue) TO (maxValue) [STEP n]
+ ----------------------------------------------------
+ execute a series of instructions a specified number of times in a loop
+
+ FOR I = 1 TO 40
+   PRINT I
+ NEXT I
+ (this would run 40 times and output every time the current counter. it would increase I everytime by 1)
+
+  FOR I = 1 TO 40 STEP 2
+   PRINT I
+ NEXT I
+ (this would run 40 times and output every time the current counter. it would increase I everytime by 2)
+
+
+ GOSUB (LineNumber)
+ ------------------
+ branch to a subroutine and return
+
+ 10 GOSUB 100
+ 20 PRINT "Now im back from the Subroutine"
+ 30 END
+ 100 REM Subroutine starts here
+ 110 PRINT "Iam now in the Subroutine"
+ 120 RETURN
+  Iam now in the Subroutine
+  Now im back from the Subroutine
+
+
+ GOTO (LineNumber)
+ -----------------
+ branch unconditionally out of the normal program sequence to a specified line number
+
+ 10 PRINT "Hello World!";
+ 20 GOTO 10
+
+
+ HEIGHT
+ ------
+ returns your terminal height
+
+ 10 PRINT height
+  42
+
+
+ HEX$ (n)
+ -----------
+ returns a string which represents the hexadecimal value of the specified Number(n) value
+
+ 10 PRINT HEX$(66)
+  42
+
+
+ IF expression THEN statements
+ ---------------------------------
+ make a decision regarding program flow based on the result of a returned expression
+
+ 10 K = 3
+ 20 J = 10
+ 30 IF J > K THEN PRINT "J is bigger than K"
+  J is bigger than K
+
+
+ INKEY$
+ ------
+ returns one character read from the terminal. it will wait till any character is being typed
+
+ 10 A = INKEY$
+ 20 PRINT A
+
+
+ INPUT Prompt, Variable
+ INPUT FileNo, Variable
+ -----------------------
+ shows Prompt and reads input from the users terminal and save it into a Variable
+
+ 10 INPUT "Enter something>", A
+ 20 PRINT A
+
+ Reads a Line from an open File and saves it into Variable
+
+ 10 INPUT #1, A
+ 20 PRINT A
+
+
+ INSTR(string, searchFor, startPos)
+ ----------------------------------
+ returns the position (starting with 0) of a substring in a string
+
+ 10 TEXT = "Hello World"
+ 20 SEARCHFOR = "W"
+ 30 PRINT INSTR(TEXT, SEARCHFOR, 0)
+  6
+
+
+ INT (n)
+ -------
+ truncate an value to a whole number
+
+ 10 PRINT INT(5.6)
+  5
+
+
+ LEFT$(String, Number)
+ ---------------------
+ returns a string that comprises the left-most specified number characters of a specified string
+
+ 10 A = "Hello World"
+ 20 B = LEFT$(A, 5)
+ 30 PRINT B
+  Hello
+
+
+ LEN(String)
+ -----------
+ returns the number of characters in the specified string
+
+ 10 A = "Hello World"
+ 20 PRINT LEN(A)
+  11
+
+
+ LET Variable = Value
+ --------------------
+ assigns a value to a variable
+
+ 10 LET A = 12345
+ 20 PRINT A
+  12345
+
+
+ LOCATE y, x
+ -----------
+ change the cursors position to y, x
+
+ 10 LOCATE 5, 5
+
+
+ LOG(n)
+ ------
+ returns the natural logarithm of the specified value(n)
+
+ 10 PRINT LOG(6)
+  1.792
+
+
+ LOG10(n)
+ --------
+ returns the natural logarithm of the specified value(n) (Base 10)
+
+ 10 PRINT LOG10(6)
+  0.778
+
+
+ MID$(String, n, [l])
+ --------------------
+ returns a string of l characters from String beginning with the n Character
+
+ 10 A = "Hello World"
+  llo
+
+
+ NINT(n)
+ -------
+ returns the nearest integer of the specified value (9.5 becomes 9)
+
+ 10 PRINT NINT(5.6)
+  6
+
+
+ OCT$(n)
+ -------
+ returns a octal value of the specified value(n)
+
+ 10 PRINT OCT$(66)
+  102
+
+
+ OPEN filename, AS fileNumber
+ ----------------------------
+ opens a file
+
+ 10 OPEN "filename.txt", AS #1
+
+
+ PEEK(n)
+ -------
+ read a value from the specified memory location(n)
+
+ 10 PRINT PEEK(1300)
+  83
+
+
+ POKE n, m
+ ----------
+ write a byte of data(m) into the specified memory location(n)
+
+ 10 POKE 1300, 255
+
+
+ POLKEY$
+ -------
+ returns one character read from the terminal. when no key is hit within one second, it returns an empty string
+
+ 10 A = POLKEY$
+ 20 PRINT A
+
+
+ PRINT expression
+ PRINT fileNumber, expression
+ ----------------
+ prints a expression on the screen
+ prints a expression into an open file
+
+ 10 A = 5
+ 20 B = 10
+ 30 PRINT A + B
+  15
+
+ 10 A = "Hello "
+ 20 B = "World"
+ 30 PRINT A;
+ 40 PRINT B
+  Hello World
+ (Adding a ; at the end of PRINT does not create a newline)
+
+ 10 PRINT# 1, "Iam writing into a file"
+
+
+ R2D(n)
+ ------
+ converts radians(n) to degrees
+
+ 10 PRINT R2D(1.2)
+  68.755
+
+
+ READ n...
+ ----
+ read a value from DATA and assign them to variables
+
+ 10 DATA 4.1, 5.6, 9.98
+ 20 READ A, B, C
+ 30 PRINT A, B, C
+  4.100          5.600          9.980
+
+
+ RESTORE
+ -------
+ allow DATA statements to be reread
+
+ 10 DATA 4.1, 5.6, 9.98
+ 20 READ A, B, C
+ 30 PRINT A, B, C
+  4.100          5.600          9.980
+ 40 RESTORE
+ 50 READ A, B, C
+ 60 PRINT A, B, C
+  4.100          5.600          9.980
+
+
+ RIGHT$(String, n)
+ -----------------
+ returns the rightmost Number(n) characters of the specified String
+
+ 10 A = "Hello World"
+ 20 PRINT RIGHT$(A, 5)
+  World
+
+
+ RND
+ ---
+ returns a random number between 0 and 1
+
+ 10 PRINT RND
+  0.249
+
+
+ SGN(n)
+ ------
+ returns the sign of the specified value(n)
+ 10 PRINT SGN(5)
+ 20 PRINT SGN(0)
+ 30 PRINT SGN(-7)
+  1
+  0
+  -1
+
+
+ SIN(n)
+ ------
+ returns the trigonometric sine of the specified value(n)
+ 10 PRINT SIN(36)
+  -0.991778853443116
+
+
+ SLEEP n
+ -------
+ pauses the program for a specified amount of seconds(n)
+
+ 10 SLEEP 5
+
+
+ SPACE$(n)
+ ---------
+ returns the specified amount of spaces(n)
+
+ 10 PRINT "ABC" SPACE$(10) "ABC"
+  abc          abc
+
+
+ SQR(n)
+ ------
+ returns the square root of the specified value(n)
+
+ 10 PRINT SQR(36)
+  6
+
+
+ STOP
+ ----
+ halts the program and returns to the basic interpreter
+ useful for debugging programs
+
+
+ STR(n)
+ ------
+ returns a string representation of the specified value(n)
+
+ 10 PRINT STR(12345)
+  12345
+
+
+ TAB$(n)
+ ------
+ returns the specified amount of spaces(n)
+
+ 10 PRINT "ABC" TAB$(10) "ABC"
+  abc          abc
+
+
+ TAN(n)
+ ------
+ returns the trigonometric tangent of the specified value(n)
+
+ 10 PRINT TAN(38)
+  0.310
+
+
+ TIME$
+ -----
+ returns the local system time
+
+ 10 PRINT TIME$
+  07:49:38
+
+
+ TIMER
+ -----
+ returns the number of seconds since midnight
+
+ 10 PRINT TIMER
+  28210
+
+
+ TROFF
+ -----
+ stops tracing of program statements
+ useful for debugging
+
+
+ TRON
+ ----
+ starts tracing of program statements
+ useful for debugging
+
+
+ USER$
+ -----
+ returns the current logged in user
+
+ 10 PRINT USER$
+  archer
+
+
+ WIDTH
+ -----
+ returns your terminal width
+
+ 10 PRINT width
+  141
+
+
+ VAL(String)
+ -----------
+ returns the numerical value of the specified String
+
+ 10 PRINT VAL("12345")
+  12345
+
+
+
+ 3. How to...
+ ------------
+
+ Q: I need a XOR Function, but there is none.
+ A: Create the Function with:
+    DEF XOR(Value1, Value2) = (Value1 OR Value2) - (Value1 AND Value2)
+    Now you can call it with:
+    PRINT XOR(5, 361)
+     364
+
+
+ Q: How do i read from a file?
+ A: 10 OPEN "filename.txt", AS #1
+    20 IF EOF(1) = -1 THEN GOTO 60
+    30 INPUT# 1, A
+    40 PRINT A
+    50 GOTO 20
+    60 CLOSE #1
+
+
+ Q: How do i write into a file?
+ A: 10 OPEN "filename.txt", AS #1
+    20 PRINT# 1, "Hello World!"
+    30 CLOSE #1
+    Note: this will always OVERWRITE the file
+
+
+ Q: How do i APPEND into a file?
+ A: Basically, you have to open the file and put the filepointer at the end of file. To do so:
+    10 OPEN "filename.txt", AS #1
+    20 IF EOF(1) = -1 THEN GOTO 50
+    30 INPUT# 1, DUMPP$
+    40 GOTO 20
+    50 PRINT# 1, "We are now at the End of File and appending stuff"
+    60 CLOSE #1
+
+
+ Q: How do i split a string into an Array?
+ A: You need to iterate through your String (YOURSTRING) and look for a delimiter (DELIMITER). 
+    For every iteration put the actual Character at that Position in the String (YOURSTRING)
+    in a temporary Variable (TSTR).
+    Once you found the delimiter (DELIMITER), save the Result of the temporary Variable (TSTR) into an Array.
+    MAXSTACK tells you how many Items are actually in the Array.
+    A Example is below:
+    10  DIM ARRAY(2)
+    20  DELIMITER = " "
+    30  YOURSTRING = "Hello World"
+    40  MAXSTACK = 0
+    45  REM PUT YOUR PROGRAM LOGIC HERE
+    50  GOSUB 100
+    55  REM PUT YOUR PROGRAM LOGIC HERE
+    60  END
+   100  REM split
+   110  TSTR = ""
+   120  FOR I = 1 TO LEN(YOURSTRING)
+   130  IF MID$(YOURSTRING, I, 1) = DELIMITER THEN GOTO 200
+   140  TSTR = TSTR + MID$(YOURSTRING, I, 1)
+   150  IF I = LEN(YOURSTRING) THEN GOTO 200
+   160  NEXT I
+   170  RETURN
+   200  REM We have found a delimiter and are pushing it into the Array
+   210  MAXSTACK = MAXSTACK + 1
+   220  ARRAY(MAXSTACK) = TSTR
+   230  TSTR = ""
+   240  GOTO 160
+
+
+ Q: How do i generate a Random Number?
+ A: 10 RANDOMIZE TIMER
+    20 MAXNR = 10
+    20 RNR = INT(RND(1)*MAXNR)
+    30 PRINT RNR
+
+
+ Q: I would like to Code in BASIC, but all those Line Numbers are messy!
+ A: I've made a Script which allows you, to code without Line Numbers and use Labels for GOTO/GOSUB
+    You can find it here: https://p85.github.io/renumber/renumber.html
+
+
+ 4. COMM.EXE Basic Programs
+ --------------------------
+
+ General Info
+ ------------
+ Your Program has to run in an infinite Loop. Your Program needs also some SLEEPs otherwise it will burn
+ too much CPU and gets killed. You have to watch for User Input and disconnect the Caller if that happens.
+ Otherwise the Caller would block your Modem forever.
+ Make Sure COMM.EXE is in your Process-Table (ps)
+ Open a new Session and run the Basic Program.
+
+ Heres an Basic Template:
+ ------------------------
+ 10 SLEEP 0.1
+ 20 TMO = 600
+ 25 CT = 0
+ 100 OPEN "COM1:9600", AS #1
+ 110 SLEEP 0.1
+
+
+ Q: How do i accept an incoming Call?
+ A: You have to read the Buffer and watch for a "RING" (Note: you have to strip a \n at the end of Buffer)
+    Then you should send "ATA". You are connected now.
+
+    (I Assume you have the Basic Template)
+    115 REM If Buffer empty, go back to 110
+    120 IF EOF(1) < 0 THEN GOTO 110
+    125 REM Store Buffer in BUF Variable
+    130 INPUT# 1, BUF
+    135 REM If theres a "RING" in BUF we got a call. GoTo Line 160
+    140 IF LEFT$(BUF, 4) = "RING" THEN GOTO 160
+    145 REM Otherwise go back to 110
+    150 GOTO 110
+    155 REM Send ATA and initiate a connection
+    160 PRINT# 1, "ATA"
+    170 REM You are now connected, put Program Logic here
+
+
+ Q: How do i read input and disconnect if the User is idle for more than n seconds?
+ A: We have set in the TMO Variable a Timeout in seconds. The CT Variable will hold our Current Timer Value.
+
+
+    (I Assume you have the Basic Template & the Incoming Call part)
+    195 REM Show an Prompt
+    200 PRINT# 1, "Enter something:";
+    205 REM If theres crap in the Buffer, empty it
+    210 IF EOF(1) = 0 THEN INPUT# 1, DUMP : GOTO 210
+    215 REM If theres actual Input, store it in INP Variable
+    220 IF EOF(1) = 0 THEN INPUT# 1, INP : SLEEP 0.1 : GOTO 310
+    225 REM Strip the \n
+    230 INP = LEFT$(INP, LEN(INP)-1)
+    235 REM Check if CT > TMO. If True the timeout has been passed. Disconnect the user
+    240 IF CT > TMO THEN PRINT# 1, "INPUT TIMEOUT, BYE" : PRINT# 1, "MODEM HANGUP" : SLEEP 1 : PRINT# 1, "+++" : PRINT# 1, "ATH0" : GOTO 20
+    245 REM Increment the Current Timer (CT) by 0.1
+    250 CT = CT + 0.1
+    255 REM Sleep a little bit...
+    260 SLEEP 0.1
+    270 GOTO 220
+    295 REM Strip the \n
+    300 INP = LEFT$(IMP, LEN(INP)-1)
+    305 REM Reset the Current Timer (CT)
+    310 CT = 0
+    315 REM The entered User Value is now in INP
