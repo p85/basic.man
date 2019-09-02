@@ -23,15 +23,40 @@ Changelog
 02.09.2019
  - added STRING$
  - renamed STR to STR$
+ - Added Introduction to Variable Data Types
 
 
-1. Overview of Commands
-2. Detailed Overview of Commands
-3. How to...
-4. COMM.EXE Basic Programs
+1. Variables and Data Types
+2. Array Variables
+3. Overview of Commands
+4. Detailed Overview of Commands
+5. How to...
+6. COMM.EXE Basic Programs
 
 
-1. Overview of Commands
+1. Variables and Data Types
+---------------------------
+You can store either Text or Numerical Values in Variables. Variablenames can contain Letters and Digits, but they have to Start with a Letter.
+You cannot use Reserved Keywords (e.g. FOR, IF) as Variablenames.
+Usually Variablenames are suffixed with a Type Definition Character:
+ - $ represents a Text (String) Value
+ - % represents a Numeric (Integer) Value
+ - ! represents a Numeric (Single-Precision) Value
+For Example:
+ 10 NAME$ = "some name"
+would represent a String Variable
+
+
+2. Array Variables
+------------------
+An Array Variable is basically a List of Values. These can be accessed by specifying a Index Number.
+As Example we define an String Array of Size 10:
+ 10 DIM MYLIST$(10)
+Now we can modify the 5th Entry (note that the Array Index usually starts at 0, and can be also negative):
+ 20 MYLIST$(4) = "some text"
+
+
+3. Overview of Commands
 -----------------------
 
 abs       - returns the absolute value of the specified value
@@ -117,7 +142,7 @@ width     - returns your terminal width
 val       - returns the numerical value of the specified string value
 
 
-2. Detailed overview of Commands
+4. Detailed overview of Commands
 --------------------------------
 
  ABS(n)
@@ -658,7 +683,7 @@ repeats a string n times
 
 
 
- 3. How to...
+ 5. How to...
  ------------
 
  Q: I need a XOR Function, but there is none.
@@ -737,7 +762,7 @@ repeats a string n times
     You can find it here: https://p85.github.io/renumber/renumber.html
 
 
- 4. COMM.EXE Basic Programs
+ 6. COMM.EXE Basic Programs
  --------------------------
 
  General Info
