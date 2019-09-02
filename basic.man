@@ -138,6 +138,7 @@ string$   - repeats a string n times
 tab       - returns the specified amount of spaces
 tab$      - returns the specified amount of spaces
 tan       - returns the trigonometric tangent of the specified value
+tim       - returns the current second, minute, hour, day or year depending on the numerical value passed
 time$     - returns the local system time
 timer     - returns the number of seconds since midnight
 troff     - stops tracing of program statements
@@ -663,6 +664,20 @@ repeats a string n times
 
  10 PRINT TAN(38)
   0.310
+
+
+ TIM(n)
+ ------
+ returns the current second, minute, hour, day or year depending on the numerical value passed
+
+ 0 - current minute (0-59)
+ 1 - current hour (0-23)
+ 2 - current day (1-366)
+ 3 - current year (0-99)
+ 4 - current second (0-59)
+
+ 10 PRINT TIM(0)
+  29
 
 
  TIME$
