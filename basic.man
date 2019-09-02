@@ -144,6 +144,7 @@ timer     - returns the number of seconds since midnight
 typ       - returns the type of the next record in a file
 troff     - stops tracing of program statements
 tron      - starts tracing of program statements
+ups$      - returns the uppercase value of the given string
 user$     - returns the current logged in user
 width     - returns your terminal width
 val       - returns the numerical value of the specified string value
@@ -733,6 +734,13 @@ repeats a string n times
  ----
  starts tracing of program statements
  useful for debugging
+
+
+ UPS$(string)
+ ------------
+ returns the uppercase value of the given string
+
+ 10 PRINT UPS$("hello")
 
 
  USER$
