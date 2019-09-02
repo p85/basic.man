@@ -61,6 +61,7 @@ Now we can modify the 5th Entry (note that the Array Index usually starts at 0, 
 -----------------------
 
 abs       - returns the absolute value of the specified value
+asc       - returns the ASCII-Code for its equivalent character
 atn       - returns the arctangent of the specified value
 beep      - sends a bell
 chr$      - convert an ASCII-Code to its equivalent character
@@ -104,6 +105,7 @@ mid$      - returns a string of l characters from String beginning with the n Ch
 new       - creates a new basic program
 next      - used within for. execute a series of instructions a specified number of times in a loop
 nint      - returns the nearest integer of the specified value (9.5 becomes 9)
+num       - returns the ASCII-Code for its equivalent character
 oct$      - returns a octal value of a specific value
 open      - opens a file
 pclear0   - reserves one page of memory (no effect)
@@ -159,6 +161,14 @@ val       - returns the numerical value of the specified string value
 
  PRINT ABS(-40)
   40
+
+
+ ASC(character), NUM(character)
+ ------------------------------
+ returns the ASCII-Code for its equivalent character
+
+ 10 PRINT ASC(" ")
+  32
 
 
  ATN(n)
