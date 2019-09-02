@@ -96,6 +96,7 @@ int       - truncate an value to a whole number
 left$     - returns a string that comprises the left-most specified number characters of a specified string
 len       - returns the number of characters in the specified string
 let       - assigns a value to a variable
+lin       - returns one or more line feeds
 locate    - change the cursors position
 log       - returns the natural logarithm of the specified value
 log10     - returns the natural logarithm of the specified value (Base 10)
@@ -405,6 +406,16 @@ val       - returns the numerical value of the specified string value
  10 LET A = 12345
  20 PRINT A
   12345
+
+
+ LIN(n)
+ ------
+ returns one or more line feeds
+
+ 10 PRINT "Hello!"; LIN(2)
+ Hello!
+ <Line Feed>
+ <Line Feed>
 
 
  LOCATE y, x
