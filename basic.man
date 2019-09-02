@@ -20,6 +20,9 @@ Changelog
 17.07.2018
  - changed how INKEY$ works
  - added POLKEY$
+02.09.2019
+ - added STRING$
+ - renamed STR to STR$
 
 
 1. Overview of Commands
@@ -100,7 +103,8 @@ spc$      - returns a string of specified Number value of spaces
 sqr       - returns the square root of the specified value
 sqrt      - returns the square root of the specified value
 stop      - halts the program and returns to the basic interpreter
-str       - returns a string representation of the specified value
+str$      - returns a string representation of the specified value
+string$   - repeats a string n times
 tab       - returns the specified amount of spaces
 tab$      - returns the specified amount of spaces
 tan       - returns the trigonometric tangent of the specified value
@@ -570,12 +574,19 @@ val       - returns the numerical value of the specified string value
  useful for debugging programs
 
 
- STR(n)
- ------
+ STR$(n)
+ -------
  returns a string representation of the specified value(n)
 
- 10 PRINT STR(12345)
+ 10 PRINT STR$(12345)
   12345
+
+
+STRING$(n, string)
+------------------
+repeats a string n times
+10 PRINT STRING$(10, "A")
+ AAAAAAAAAA
 
 
  TAB$(n)
