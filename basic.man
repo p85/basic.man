@@ -129,6 +129,7 @@ sin       - returns the trigonometric sine of the specified value
 sleep     - pauses the program for a specified amount of seconds
 space$    - returns a string of specified Number value of spaces
 spc$      - returns a string of specified Number value of spaces
+spa       - returns a string of specified Number value of spaces
 sqr       - returns the square root of the specified value
 sqrt      - returns the square root of the specified value
 stop      - halts the program and returns to the basic interpreter
@@ -611,8 +612,8 @@ val       - returns the numerical value of the specified string value
  10 SLEEP 5
 
 
- SPACE$(n)
- ---------
+ SPACE$(n), SPC$(n), SPA(n)
+ --------------------------
  returns the specified amount of spaces(n)
 
  10 PRINT "ABC" SPACE$(10) "ABC"
