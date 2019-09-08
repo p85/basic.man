@@ -20,6 +20,26 @@ Changelog
 17.07.2018
  - changed how INKEY$ works
  - added POLKEY$
+28.08.2019
+ - Added the following language extensions to BASIC for better HP2000 Access BASIC compatibility:
+ - READ #n[,r];var - reads from file #n optional record r and inputs vars
+ - PRINT #n[,r];var - prints variables to file #n at optional record r
+
+ - Added the following functions to BASIC for better HP2000 Access BASIC compatibility:
+ - LIN(n)
+ - POS(string1,string2)
+ - TYP(filenum)
+ - SPA(number)
+ - REC(filenum)
+ - BRK(arg)
+ - NUM(char)
+ - TIM(n)
+ - SYS(n)
+ - UPS$(string)
+
+ - Added synonyms for HP2000 Access BASIC compatibility
+ - SCR, SCRATCH - synonym for NEW
+
 02.09.2019
  - added STRING$
  - renamed STR to STR$
@@ -64,13 +84,14 @@ abs       - returns the absolute value of the specified value
 asc       - returns the ASCII-Code for its equivalent character
 atn       - returns the arctangent of the specified value
 beep      - sends a bell
+brk       - sets and returns status of BREAK key
 chr$      - convert an ASCII-Code to its equivalent character
 cint      - returns the nearest integer of the specified value (9.5 becomes 10)
 clear     - clears all variables and closes all open files
-close     - close the file and save it/create if it doesnt exist
+close     - close the file and save it/create if it doesn't exist
 cls       - clears the screen
-color     - changes the background and/or foreground color of the terminal
-cos       - returns the cosinus of a specified value
+color     - changes the background and/or foreground colour of the terminal
+cos       - returns the cosine of a specified value
 csng      - convert a specified value to a single precision number
 data      - store the numeric and string constants that are accessed by the program READ statements
 date$     - returns the current date
@@ -94,6 +115,7 @@ inkey$    - returns one character read from the terminal. it will wait till any 
 input     - shows Prompt and reads input from the users terminal and save it into a Variable
 instr     - returns the position of a substring in a string
 int       - truncate an value to a whole number
+itm       - returns the data item number in the current record
 left$     - returns a string that comprises the left-most specified number characters of a specified string
 len       - returns the number of characters in the specified string
 let       - assigns a value to a variable
@@ -111,10 +133,10 @@ open      - opens a file
 pclear0   - reserves one page of memory (no effect)
 pclear1   - reserves two pages of memory (no effect)
 peek      - read a value from the specified memory location
-pmode0    - selects a reosultion and first memory page of a low resolution graphic screen. (0 - 128 x 96, 2 color) (no effect)
+pmode0    - selects a resolution and first memory page of a low resolution graphic screen. (0 - 128 x 96, 2 colour) (no effect)
 poke      - write a byte of data into the specified memory location
 polkey$   - returns one character read from the terminal. when no key is hit within one second, it returns an empty string
-pos       - returns the character position in string 1, where the first occurence of string 2 was found
+pos       - returns the character position in string 1, where the first occurrence of string 2 was found
 print     - prints a expression on the screen
 r2d       - converts radians to degrees
 randomize - reseed the random number generator
@@ -132,12 +154,14 @@ sgn       - returns the sign of the specified value
 sin       - returns the trigonometric sine of the specified value
 sleep     - pauses the program for a specified amount of seconds
 space$    - returns a string of specified Number value of spaces
+spa       - returns a string of specified Number value of spaces
 spc$      - returns a string of specified Number value of spaces
 spa       - returns a string of specified Number value of spaces
 sqr       - returns the square root of the specified value
 sqrt      - returns the square root of the specified value
 stop      - halts the program and returns to the basic interpreter
 str$      - returns a string representation of the specified value
+sys       - returns various system values
 string$   - repeats a string n times
 tab       - returns the specified amount of spaces
 tab$      - returns the specified amount of spaces
@@ -181,6 +205,11 @@ val       - returns the numerical value of the specified string value
   1.546
 
 
+ BRK(n)
+ ______
+ enables and disables the break key
+  
+  
  CHR$(n)
  -------
  convert an ASCII-Code (n) to its equivalent character
@@ -298,14 +327,14 @@ val       - returns the numerical value of the specified string value
  ----------------------------------------------------
  execute a series of instructions a specified number of times in a loop
 
- FOR I = 1 TO 40
-   PRINT I
- NEXT I
+ 10 FOR I = 1 TO 40
+ 20  PRINT I
+ 30 NEXT I
  (this would run 40 times and output every time the current counter. it would increase I everytime by 1)
 
-  FOR I = 1 TO 40 STEP 2
-   PRINT I
- NEXT I
+ 10 FOR I = 1 TO 40 STEP 2
+ 20  PRINT I
+ 30 NEXT I
  (this would run 40 times and output every time the current counter. it would increase I everytime by 2)
 
 
@@ -343,8 +372,8 @@ val       - returns the numerical value of the specified string value
  -----------
  returns a string which represents the hexadecimal value of the specified Number(n) value
 
- 10 PRINT HEX$(66)
-  42
+ 10 PRINT HEX$(127)
+  7F
 
 
  IF expression THEN statements
@@ -361,8 +390,8 @@ val       - returns the numerical value of the specified string value
  ------
  returns one character read from the terminal. it will wait till any character is being typed
 
- 10 A = INKEY$
- 20 PRINT A
+ 10 A$ = INKEY$
+ 20 PRINT A$
 
 
  INPUT Prompt, Variable
@@ -370,12 +399,12 @@ val       - returns the numerical value of the specified string value
  -----------------------
  shows Prompt and reads input from the users terminal and save it into a Variable
 
- 10 INPUT "Enter something>", A
- 20 PRINT A
+ 10 INPUT "Enter something>", A$
+ 20 PRINT A$
 
  Reads a Line from an open File and saves it into Variable
 
- 10 INPUT #1, A
+ 10 INPUT# 1, A
  20 PRINT A
 
 
@@ -383,9 +412,9 @@ val       - returns the numerical value of the specified string value
  ----------------------------------
  returns the position (starting with 0) of a substring in a string
 
- 10 TEXT = "Hello World"
- 20 SEARCHFOR = "W"
- 30 PRINT INSTR(TEXT, SEARCHFOR, 0)
+ 10 TEXT$ = "Hello World"
+ 20 SEARCHFOR$ = "W"
+ 30 PRINT INSTR(TEXT$, SEARCHFOR$, 0)
   6
 
 
@@ -397,171 +426,203 @@ val       - returns the numerical value of the specified string value
   5
 
 
+ ITM(fileNumber)
+ ---------------
+ returns the number of the data item currently pointed to in the current record of file fileNumber.
+ In Telehack BASIC this will almost always be 1.
+
+ 10 PRINT #1;A,B,C
+ 20 READ #1,1;A
+ 30 PRINT REC(1),ITM(1)
+  1            2
+
+
  LEFT$(String, Number)
  ---------------------
  returns a string that comprises the left-most specified number characters of a specified string
-
- 10 A = "Hello World"
- 20 B = LEFT$(A, 5)
- 30 PRINT B
+ 
+ 10 A$ = "Hello World"
+ 20 B$ = LEFT$(A$, 5)
+ 30 PRINT B$
   Hello
 
 
  LEN(String)
  -----------
  returns the number of characters in the specified string
-
- 10 A = "Hello World"
- 20 PRINT LEN(A)
+ 
+ 10 A$ = "Hello World"
+ 20 PRINT LEN(A$)
   11
-
-
+ 
+ 
  LET Variable = Value
  --------------------
  assigns a value to a variable
-
+ 
  10 LET A = 12345
  20 PRINT A
   12345
 
 
- LIN(n)
- ------
- returns one or more line feeds
+ LIN(number)
+ -----------
+ returns number of new lines
 
- 10 PRINT "Hello!"; LIN(2)
- Hello!
- <Line Feed>
- <Line Feed>
+ 10 PRINT "A" LIN(2) "B"
+  A
+
+  B
 
 
  LOCATE y, x
  -----------
  change the cursors position to y, x
-
+ 
  10 LOCATE 5, 5
-
-
+ 
+ 
  LOG(n)
  ------
  returns the natural logarithm of the specified value(n)
-
+ 
  10 PRINT LOG(6)
   1.792
-
-
+ 
+ 
  LOG10(n)
  --------
  returns the natural logarithm of the specified value(n) (Base 10)
-
+ 
  10 PRINT LOG10(6)
   0.778
-
-
+ 
+ 
  MID$(String, n, [l])
  --------------------
  returns a string of l characters from String beginning with the n Character
-
- 10 A = "Hello World"
+ 
+ 10 A$ = "Hello World"
+ 20 PRINT MID$(A$,3,3)
   llo
-
-
+ 
+ 
  NINT(n)
  -------
  returns the nearest integer of the specified value (9.5 becomes 9)
-
+ 
  10 PRINT NINT(5.6)
   6
+
+
+ NUM(string)
+ ---------
+ returns the ASCII value of the first character in a string
+
+ 10 PRINT NUM("A")
+  65
 
 
  OCT$(n)
  -------
  returns a octal value of the specified value(n)
-
+ 
  10 PRINT OCT$(66)
   102
-
-
+ 
+ 
  OPEN filename, AS fileNumber
  ----------------------------
  opens a file
-
+ 
  10 OPEN "filename.txt", AS #1
-
-
+ 
+ 
  PEEK(n)
  -------
  read a value from the specified memory location(n)
-
+ 
  10 PRINT PEEK(1300)
   83
-
-
+ 
+ 
  POKE n, m
  ----------
  write a byte of data(m) into the specified memory location(n)
-
+ 
  10 POKE 1300, 255
-
-
+ 
+ 
  POLKEY$
  -------
  returns one character read from the terminal. when no key is hit within one second, it returns an empty string
 
- 10 A = POLKEY$
- 20 PRINT A
+ 10 A$ = POLKEY$
+ 20 PRINT A$
 
 
- POS(string1, string2)
- ---------------------
- returns the character position in string 1, where the first occurence of string 2 was found
+ POS(string1,string2)
+ ____________________
+ returns the position of string2 in string1 indexed from 1 or 0 if not found
 
- 10 PRINT POS("abcdhello", "hello")
-  5
-
-
+ 10 A$="ABCDE"
+ 20 PRINT POS(A$,"CD")
+   3
+ 
+ 
  PRINT expression
- PRINT fileNumber, expression
+ PRINT# fileNumber, expression
+ PRINT #fileNumber[,recordNumber]; expression
+ PRINT #fileNumber[,recordNumber];END
  ----------------
  prints a expression on the screen
  prints a expression into an open file
-
+ prints an EOF mark to a file, truncating the file at that record
+ 
  10 A = 5
  20 B = 10
  30 PRINT A + B
   15
-
- 10 A = "Hello "
- 20 B = "World"
- 30 PRINT A;
- 40 PRINT B
+ 
+ 10 A$ = "Hello "
+ 20 B$ = "World"
+ 30 PRINT A$;
+ 40 PRINT B$
   Hello World
  (Adding a ; at the end of PRINT does not create a newline)
-
+ 
  10 PRINT# 1, "Iam writing into a file"
 
-
+ 10 PRINT #1;A$
+ 20 PRINT #1,1;"Overwriting A$ in record 1"
+ 30 PRINT #1,1;END : REM Truncates file at record 1
+ (notice the position of the # and the space in the different forms of file access)
+ 
+ 
  R2D(n)
  ------
  converts radians(n) to degrees
-
+ 
  10 PRINT R2D(1.2)
   68.755
-
-
+ 
+ 
  READ n...
+ READ #fileNumber[,recordNumber];variables
  ----
- read a value from DATA and assign them to variables
-
+ read a value from DATA or a file and assign them to variables
+ 
  10 DATA 4.1, 5.6, 9.98
  20 READ A, B, C
  30 PRINT A, B, C
   4.100          5.600          9.980
 
+ 10 READ #1;A$
+ 20 READ #1,4;B$
 
  REC(n)
  ------
- returns the current record number (line number) in the specified file. (starts with 0)
+ returns the current record number (line number) in the specified file. (starts with 1)
  10 OPEN "telehack.txt", AS #1
  20 INPUT# 1, DUMP$
  30 INPUT# 1, DUMP$
@@ -574,7 +635,7 @@ val       - returns the numerical value of the specified string value
  RESTORE
  -------
  allow DATA statements to be reread
-
+ 
  10 DATA 4.1, 5.6, 9.98
  20 READ A, B, C
  30 PRINT A, B, C
@@ -583,25 +644,31 @@ val       - returns the numerical value of the specified string value
  50 READ A, B, C
  60 PRINT A, B, C
   4.100          5.600          9.980
-
-
+ 
+ 
  RIGHT$(String, n)
  -----------------
  returns the rightmost Number(n) characters of the specified String
-
- 10 A = "Hello World"
- 20 PRINT RIGHT$(A, 5)
+ 
+ 10 A$ = "Hello World"
+ 20 PRINT RIGHT$(A$, 5)
   World
-
-
- RND
- ---
- returns a random number between 0 and 1
-
- 10 PRINT RND
+ 
+ 
+ RND(n)
+ ------
+ if n < 0, returns a random number in the interval [0, 1) seeded by INT(n)
+ if n = 0, returns a random number in the interval [0, 1)
+ if n > 0, returns a random number in the interval [0, INT(n))
+ 
+ 10 PRINT RND(-5)
+ 20 PRINT RND(0)
+ 30 PRINT RND(5)
   0.249
-
-
+  0.912
+  2.376
+ 
+ 
  SGN(n)
  ------
  returns the sign of the specified value(n)
@@ -611,19 +678,19 @@ val       - returns the numerical value of the specified string value
   1
   0
   -1
-
-
+ 
+ 
  SIN(n)
  ------
  returns the trigonometric sine of the specified value(n)
  10 PRINT SIN(36)
   -0.991778853443116
-
-
+ 
+ 
  SLEEP n
  -------
  pauses the program for a specified amount of seconds(n)
-
+ 
  10 SLEEP 5
 
 
@@ -657,21 +724,23 @@ val       - returns the numerical value of the specified string value
   12345
 
 
-STRING$(n, string)
-------------------
-repeats a string n times
-10 PRINT STRING$(10, "A")
- AAAAAAAAAA
+ 
+ STRING$(n, string)
+ ------------------
+ repeats a string n times
+
+ 10 PRINT STRING$(10, "A")
+  AAAAAAAAAA
 
 
- TAB$(n)
- ------
+ TAB(n), TAB$(n)
+ ----------------
  returns the specified amount of spaces(n)
-
+ 
  10 PRINT "ABC" TAB$(10) "ABC"
   abc          abc
-
-
+ 
+ 
  TAN(n)
  ------
  returns the trigonometric tangent of the specified value(n)
@@ -681,9 +750,9 @@ repeats a string n times
 
 
  TIM(n)
- ------
- returns the current second, minute, hour, day or year depending on the numerical value passed
-
+ -----
+ returns values of time and date depending on n
+ 
  0 - current minute (0-59)
  1 - current hour (0-23)
  2 - current day (1-366)
@@ -715,8 +784,10 @@ repeats a string n times
  returns the type of the next record in a file
 
  Return Value
- 2 - string
- 3 - end of file
+ 1 for numeric data (not currently working)
+ 2 for string data
+ 3 for end of file/data
+
  
  10  REM CREATE A FILE FOR TESTING
  20  FILENAME$ = "TEST" + STR$(INT(RND(1)*128*2)) + ".TXT"
@@ -753,6 +824,7 @@ repeats a string n times
  returns the uppercase value of the given string
 
  10 PRINT UPS$("hello")
+  HELLO
 
 
  USER$
@@ -905,11 +977,11 @@ repeats a string n times
     195 REM Show an Prompt
     200 PRINT# 1, "Enter something:";
     205 REM If theres crap in the Buffer, empty it
-    210 IF EOF(1) = 0 THEN INPUT# 1, DUMP : GOTO 210
+    210 IF EOF(1) = 0 THEN INPUT# 1, DUMP$ : GOTO 210
     215 REM If theres actual Input, store it in INP Variable
-    220 IF EOF(1) = 0 THEN INPUT# 1, INP : SLEEP 0.1 : GOTO 310
+    220 IF EOF(1) = 0 THEN INPUT# 1, INP$ : SLEEP 0.1 : GOTO 310
     225 REM Strip the \n
-    230 INP = LEFT$(INP, LEN(INP)-1)
+    230 INP$ = LEFT$(INP$, LEN(INP$)-1)
     235 REM Check if CT > TMO. If True the timeout has been passed. Disconnect the user
     240 IF CT > TMO THEN PRINT# 1, "INPUT TIMEOUT, BYE" : PRINT# 1, "MODEM HANGUP" : SLEEP 1 : PRINT# 1, "+++" : PRINT# 1, "ATH0" : GOTO 20
     245 REM Increment the Current Timer (CT) by 0.1
@@ -918,7 +990,7 @@ repeats a string n times
     260 SLEEP 0.1
     270 GOTO 220
     295 REM Strip the \n
-    300 INP = LEFT$(IMP, LEN(INP)-1)
+    300 INP$ = LEFT$(INP$, LEN(INP$)-1)
     305 REM Reset the Current Timer (CT)
     310 CT = 0
     315 REM The entered User Value is now in INP
