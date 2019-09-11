@@ -46,6 +46,9 @@ Changelog
  - Added Introduction to Variable Data Types
  - Added various HP 2000 Access BASIC Commands
 
+11.09.2019
+ - Added ARG$
+
 
 1. Variables and Data Types
 2. Array Variables
@@ -81,6 +84,7 @@ Now we can modify the 5th Entry (note that the Array Index usually starts at 0, 
 -----------------------
 
 abs       - returns the absolute value of the specified value
+arg$      - variable containing argumnets passed to program on command line
 asc       - returns the ASCII-Code for its equivalent character
 atn       - returns the arctangent of the specified value
 beep      - sends a bell
@@ -196,6 +200,14 @@ val       - returns the numerical value of the specified string value
  10 PRINT ASC(" ")
   32
 
+ ARG$
+ ----
+ A string variable this is populated with a string containing the command line arguments
+ when a BASIC program is run from the shell command prompt.
+
+@program foo bar
+PRINT ARG$
+  foo bar
 
  ATN(n)
  ------
@@ -208,6 +220,8 @@ val       - returns the numerical value of the specified string value
  BRK(n)
  ______
  enables and disables the break key
+
+ Y=BRK(0):REM break is disabled
   
   
  CHR$(n)
