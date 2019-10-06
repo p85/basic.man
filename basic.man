@@ -49,6 +49,8 @@ Changelog
 11.09.2019
  - Added ARG$
 
+05.10.2019
+ - Added RENUMBER
 
 1. Variables and Data Types
 2. Array Variables
@@ -147,6 +149,7 @@ randomize - reseed the random number generator
 read      - read a value from DATA and assign them to variables
 rec       - returns the current record number (line number) in the specified file
 rem       - explanatory remark. does not get executed by the interpreter
+renumber  - renumbers a basic program
 restore   - allow DATA statements to be reread
 return    - return from a subroutine
 right$    - returns the rightmost Number(n) characters of the specified String
@@ -252,7 +255,7 @@ PRINT ARG$
 
  COS(n)
  ------
- returns the cosinus of a specified value
+ returns the cosinus of a specified value (n) in radians
 
  PRINT COS(67)
   -0.517769799789505
@@ -637,6 +640,7 @@ PRINT ARG$
  REC(n)
  ------
  returns the current record number (line number) in the specified file. (starts with 1)
+
  10 OPEN "telehack.txt", AS #1
  20 INPUT# 1, DUMP$
  30 INPUT# 1, DUMP$
@@ -645,6 +649,19 @@ PRINT ARG$
  60 CLOSE #1
   3
 
+
+ RENUMBER [start,[inc]]
+ --------
+ Renumbers the statements of the current program in memory. When optional parameters are not
+ specified number starts at 10 and increments by 10 for each line. Can be abbrieviated to REN
+ or RENUM. Useful if you want to add more lines between existing statements.
+
+ 1 GOTO 2
+ 2 END
+ RENUMBER
+ LIST
+ 10 GOTO 20
+ 20 END
 
  RESTORE
  -------
@@ -696,7 +713,7 @@ PRINT ARG$
  
  SIN(n)
  ------
- returns the trigonometric sine of the specified value(n)
+ returns the trigonometric sine of the specified value(n) in radians
  10 PRINT SIN(36)
   -0.991778853443116
  
@@ -757,7 +774,7 @@ PRINT ARG$
  
  TAN(n)
  ------
- returns the trigonometric tangent of the specified value(n)
+ returns the trigonometric tangent of the specified value(n) in radians
 
  10 PRINT TAN(38)
   0.310
