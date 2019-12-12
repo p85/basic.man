@@ -4,7 +4,7 @@ ___.                 .__
  | \_\ \/ __ \_\___ \|  \  \___ 
  |___  (____  /____  >__|\___  >
      \/     \/     \/        \/ 
-         Manual by archer (modified 17.07.2018)
+         Manual by archer (modified 12.12.2019)
 
 
 
@@ -51,6 +51,10 @@ Changelog
 
 05.10.2019
  - Added RENUMBER
+ 
+12.12.2019
+ - Updated DEF FN to reflect standard DEC/HP/MS BASIC implementation and 
+ - clarified variable type checking
 
 1. Variables and Data Types
 2. Array Variables
@@ -62,16 +66,19 @@ Changelog
 
 1. Variables and Data Types
 ---------------------------
-You can store either Text or Numerical Values in Variables. Variablenames can contain Letters and Digits, but they have to Start with a Letter.
+You can store either Text or Numerical Values in Variables. 
+Variablenames can contain Letters and Digits, but they have to Start with a Letter. 
 You cannot use Reserved Keywords (e.g. FOR, IF) as Variablenames.
-Usually Variablenames are suffixed with a Type Definition Character:
+Variablenames can be suffixed with a Type Definition Character:
  - $ represents a Text (String) Value
  - % represents a Numeric (Integer) Value
  - ! represents a Numeric (Single-Precision) Value
+Numerical variables and strings cannot be used interchangeably.
 For Example:
  10 NAME$ = "some name"
-would represent a String Variable
-
+would represent a String Variable, but
+ 10 NAME = "some name"
+would be a TYPE MISMATCH ERROR as you cant assign a string to a numeric variable
 
 2. Array Variables
 ------------------
@@ -101,7 +108,7 @@ cos       - returns the cosine of a specified value
 csng      - convert a specified value to a single precision number
 data      - store the numeric and string constants that are accessed by the program READ statements
 date$     - returns the current date
-def       - defines a function
+def fn    - defines a function
 defdbl    - declare a variable as double precision number
 defint    - declare a variable as integer number
 defsng    - declare a variable as single precision number 
@@ -279,14 +286,16 @@ PRINT ARG$
   4.100          5.600          9.980
 
 
- DEF FunctionName(Argument) = Expression
+ DEF FNname(Argument) = Expression
  ---------------------------------------
- define a function with the Name 'FunctionName' which accept an 'Argument' and returns the defined expression
+ define a function with the Name 'FNname' which accept an 'Argument' and returns the defined expression. Function name
+ must always begin with FN.
 
- DEF testFn(testArg) = TestArg + TestArg
- RESULT = testFn(5)
- PRINT RESULT
-  10
+ 10 DEF FN square(x)=x^2
+ 20 DEF FNcube(x) = x^3
+ 30 PRINT FNsquare(5),FNcube(5)
+ RUN
+  25       125
 
 
  DEFDBL (variable)
