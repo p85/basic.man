@@ -37,9 +37,6 @@ Changelog
  - SYS(n)
  - UPS$(string)
 
- - Added synonyms for HP2000 Access BASIC compatibility
- - SCR, SCRATCH - synonym for NEW
-
 02.09.2019
  - added STRING$
  - renamed STR to STR$
@@ -162,8 +159,6 @@ return    - return from a subroutine
 right$    - returns the rightmost Number(n) characters of the specified String
 rnd       - returns a random number between 0 and 1
 run       - execute the program in memory
-scr       - creates a new basic program
-scratch   - creates a new basic program
 sgn       - returns the sign of the specified value
 sin       - returns the trigonometric sine of the specified value
 sleep     - pauses the program for a specified amount of seconds
