@@ -4,7 +4,7 @@ ___.                 .__
  | \_\ \/ __ \_\___ \|  \  \___ 
  |___  (____  /____  >__|\___  >
      \/     \/     \/        \/ 
-         Manual by archer (modified 12.12.2019)
+         Manual by archer (modified 27.05.2020)
 
 
 
@@ -52,6 +52,10 @@ Changelog
 12.12.2019
  - Updated DEF FN to reflect standard DEC/HP/MS BASIC implementation and 
  - clarified variable type checking
+
+27.05.2020
+ - updated POLKEY$ Definition
+
 
 1. Variables and Data Types
 2. Array Variables
@@ -145,7 +149,7 @@ pclear1   - reserves two pages of memory (no effect)
 peek      - read a value from the specified memory location
 pmode0    - selects a resolution and first memory page of a low resolution graphic screen. (0 - 128 x 96, 2 colour) (no effect)
 poke      - write a byte of data into the specified memory location
-polkey$   - returns one character read from the terminal. when no key is hit within one second, it returns an empty string
+polkey$   - returns one character read from the terminal. when no key is hit within a given time (in seconds), it returns an empty string
 pos       - returns the character position in string 1, where the first occurrence of string 2 was found
 print     - prints a expression on the screen
 r2d       - converts radians to degrees
@@ -576,10 +580,11 @@ PRINT ARG$
  
  POLKEY$
  -------
- returns one character read from the terminal. when no key is hit within one second, it returns an empty string
+ returns one character read from the terminal. when no key is hit within a given time (in seconds), it returns an empty string
 
- 10 A$ = POLKEY$
- 20 PRINT A$
+ 10 A$ = POLKEY$(5)
+ 20 REM This will wait 5 seconds, waiting for a User Input
+ 30 PRINT A$
 
 
  POS(string1,string2)
