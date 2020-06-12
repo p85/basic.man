@@ -4,7 +4,7 @@ ___.                 .__
  | \_\ \/ __ \_\___ \|  \  \___ 
  |___  (____  /____  >__|\___  >
      \/     \/     \/        \/ 
-         Manual by archer (modified 27.05.2020)
+         Manual by archer (modified 12.06.2020)
 
 
 
@@ -57,6 +57,9 @@ Changelog
  - updated POLKEY$ Definition
 
 
+07.06.2020
+ - Added ARGC% and ARGV$(n)
+
 1. Variables and Data Types
 2. Array Variables
 3. Overview of Commands
@@ -95,9 +98,12 @@ Now we can modify the 5th Entry (note that the Array Index usually starts at 0, 
 
 abs       - returns the absolute value of the specified value
 arg$      - variable containing argumnets passed to program on command line
+argc%     - variable containing the number of arguments passed to the program
+argv$     - an array containing all of the arguments passed to the program
 asc       - returns the ASCII-Code for its equivalent character
 atn       - returns the arctangent of the specified value
 beep      - sends a bell
+bin$      - returns the binary representation of an integer as a string
 brk       - sets and returns status of BREAK key
 chr$      - convert an ASCII-Code to its equivalent character
 cint      - returns the nearest integer of the specified value (9.5 becomes 10)
@@ -209,14 +215,37 @@ val       - returns the numerical value of the specified string value
  10 PRINT ASC(" ")
   32
 
+
  ARG$
  ----
  A string variable this is populated with a string containing the command line arguments
  when a BASIC program is run from the shell command prompt.
 
-@program foo bar
-PRINT ARG$
+ @program foo bar
+ PRINT ARG$
   foo bar
+
+
+ ARGV$(n)
+ --------
+ An array containing all of the arguments passed to the program
+
+
+ ARGC%
+ -----
+ The number of arguments passed to the program
+
+   10  FOR I = 0 TO ARGC%-1
+   20  PRINT ARGV$(I)
+   30  NEXT I
+
+ @program foo "hello world" bar
+ [run program foo "hello world" bar]
+ program.bas
+ foo
+ hello world
+ bar
+
 
  ATN(n)
  ------
@@ -224,6 +253,14 @@ PRINT ARG$
 
  PRINT ATN(40)
   1.546
+
+
+ BIN$(n)
+ ______
+ returns the binary representation of the integer n as a string
+
+ PRINT BIN$(123)
+  1111011
 
 
  BRK(n)
