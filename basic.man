@@ -67,15 +67,43 @@ Changelog
 1.a Comparing Operators (for use with IF)
 -----------------------------------------
 =   equal
+10 A% = 0 : IF A% = 0 THEN PRINT "It is equal!"
+
 >   greater than
+10 A% = 5 : IF A% > 0 THEN PRINT "It is greater!"
+
 >=  greater or equal
+10 A% = 0 : IF A% >= 0 THEN PRINT "It is greater or equal!"
+
 <   lesser
+10 A% = -1 : IF A% < 0 THEN PRINT "It is lesser!"
+
 <=  less or equal
+10 A% = 0 : IF A% <= 0 THEN PRINT "It is lesser or equal!"
+
 <>  not equal
+10 A% = 1 : IF A% <> 0 THEN PRINT "It is not equal!"
+
 
 1.b Logical Operators
 ---------------------
-AND, OR, NOT
+AND  Bitwise AND Operation
+10 PRINT 5 AND 1
+
+AND  Using within IF to check if both Conditions are truthy
+10 A% = 3 : B% = 5
+20 IF A% = 3 AND B% = 5 THEN PRINT "Both Conditions are true"
+
+OR   Bitwise OR Operation
+10 PRINT 5 OR 1
+
+OR   Using within IF to check if one Condition is truthy
+10 A% = 3 : B% = 5
+20 IF A% = 3 OR B% = 5 THEN PRINT "Atleast one condition is true"
+
+NOT  Negation
+10 PRINT NOT 0
+
 
 2. Variables and Data Types
 ---------------------------
@@ -92,6 +120,7 @@ For Example:
 would represent a String Variable, but
  10 NAME = "some name"
 would be a TYPE MISMATCH ERROR as you cant assign a string to a numeric variable
+
 
 3. Array Variables
 ------------------
@@ -164,6 +193,7 @@ peek      - read a value from the specified memory location
 pmode0    - selects a resolution and first memory page of a low resolution graphic screen. (0 - 128 x 96, 2 colour) (no effect)
 poke      - write a byte of data into the specified memory location
 polkey$   - returns one character read from the terminal. when no key is hit within a given time (in seconds), it returns an empty string
+port%     - returns the currently logged in port number
 pos       - returns the character position in string 1, where the first occurrence of string 2 was found
 print     - prints a expression on the screen
 r2d       - converts radians to degrees
@@ -449,6 +479,7 @@ val       - returns the numerical value of the specified string value
  IF expression THEN statements
  ---------------------------------
  make a decision regarding program flow based on the result of a returned expression
+ see section 1.a and 1.b for supported operators
 
  10 K = 3
  20 J = 10
@@ -630,6 +661,13 @@ val       - returns the numerical value of the specified string value
  10 A$ = POLKEY$(5)
  20 REM This will wait 5 seconds, waiting for a User Input
  30 PRINT A$
+
+
+ PORT%
+ -----
+ returns the Port from the current logged in User
+
+ 10 PRINT PORT%
 
 
  POS(string1,string2)
