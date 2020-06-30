@@ -4,7 +4,7 @@ ___.                 .__
  | \_\ \/ __ \_\___ \|  \  \___ 
  |___  (____  /____  >__|\___  >
      \/     \/     \/        \/ 
-         Manual by archer (modified 12.06.2020)
+         Manual by archer (modified 30.06.2020)
 
 
 
@@ -24,7 +24,6 @@ Changelog
  - Added the following language extensions to BASIC for better HP2000 Access BASIC compatibility:
  - READ #n[,r];var - reads from file #n optional record r and inputs vars
  - PRINT #n[,r];var - prints variables to file #n at optional record r
-
  - Added the following functions to BASIC for better HP2000 Access BASIC compatibility:
  - LIN(n)
  - POS(string1,string2)
@@ -36,39 +35,49 @@ Changelog
  - TIM(n)
  - SYS(n)
  - UPS$(string)
-
 02.09.2019
  - added STRING$
  - renamed STR to STR$
  - Added Introduction to Variable Data Types
  - Added various HP 2000 Access BASIC Commands
-
 11.09.2019
  - Added ARG$
-
 05.10.2019
  - Added RENUMBER
- 
 12.12.2019
  - Updated DEF FN to reflect standard DEC/HP/MS BASIC implementation and 
  - clarified variable type checking
-
 27.05.2020
  - updated POLKEY$ Definition
-
-
 07.06.2020
  - Added ARGC% and ARGV$(n)
-
-1. Variables and Data Types
-2. Array Variables
-3. Overview of Commands
-4. Detailed Overview of Commands
-5. How to...
-6. COMM.EXE Basic Programs
+30.06.2020
+ - Added Comparing/Logical Operators
 
 
-1. Variables and Data Types
+1. Comparing/Logical Operators
+2. Variables and Data Types
+3. Array Variables
+4. Overview of Commands
+5. Detailed Overview of Commands
+6. How to...
+7. COMM.EXE Basic Programs
+
+
+1.a Comparing Operators (for use with IF)
+-----------------------------------------
+=   equal
+>   greater than
+>=  greater or equal
+<   lesser
+<=  less or equal
+<>  not equal
+
+1.b Logical Operators
+---------------------
+AND, OR, NOT
+
+2. Variables and Data Types
 ---------------------------
 You can store either Text or Numerical Values in Variables. 
 Variablenames can contain Letters and Digits, but they have to Start with a Letter. 
@@ -84,7 +93,7 @@ would represent a String Variable, but
  10 NAME = "some name"
 would be a TYPE MISMATCH ERROR as you cant assign a string to a numeric variable
 
-2. Array Variables
+3. Array Variables
 ------------------
 An Array Variable is basically a List of Values. These can be accessed by specifying a Index Number.
 As Example we define an String Array of Size 10:
@@ -92,8 +101,7 @@ As Example we define an String Array of Size 10:
 Now we can modify the 5th Entry (note that the Array Index usually starts at 0, and can be also negative):
  20 MYLIST$(4) = "some text"
 
-
-3. Overview of Commands
+4. Overview of Commands
 -----------------------
 
 abs       - returns the absolute value of the specified value
@@ -197,7 +205,7 @@ width     - returns your terminal width
 val       - returns the numerical value of the specified string value
 
 
-4. Detailed overview of Commands
+5. Detailed overview of Commands
 --------------------------------
 
  ABS(n)
@@ -929,7 +937,7 @@ val       - returns the numerical value of the specified string value
 
 
 
- 5. How to...
+ 6. How to...
  ------------
 
  Q: I need a XOR Function, but there is none.
@@ -1008,7 +1016,7 @@ val       - returns the numerical value of the specified string value
     You can find it here: https://p85.github.io/renumber/renumber.html
 
 
- 6. COMM.EXE Basic Programs
+ 7. COMM.EXE Basic Programs
  --------------------------
 
  General Info
