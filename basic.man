@@ -68,6 +68,7 @@ Changelog
 6. Detailed Overview of Commands
 7. How to...
 8. COMM.EXE Basic Programs
+9. ANSI Escape Sequences
 
 
 1. Set Up Your Editor for BASIC Programming
