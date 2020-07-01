@@ -51,6 +51,8 @@ Changelog
  - updated POLKEY$ Definition
 07.06.2020
  - Added ARGC% and ARGV$(n)
+28.06.2020
+ - Added PORT%
 30.06.2020
  - Added Comparing/Logical Operators
 01.07.2020
@@ -679,7 +681,7 @@ val       - returns the numerical value of the specified string value
  -----
  returns the Port from the current logged in User
 
- 10 PRINT PORT%
+ 10 PRINT USER$ + " is logged in on port: " + STR$(PORT%)
 
 
  POS(string1,string2)
