@@ -685,7 +685,7 @@ val       - returns the numerical value of the specified string value
 
 
  POS(string1,string2)
- ____________________
+ --------------------
  returns the position of string2 in string1 indexed from 1 or 0 if not found
 
  10 A$="ABCDE"
