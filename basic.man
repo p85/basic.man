@@ -67,9 +67,9 @@ Changelog
 8. COMM.EXE Basic Programs
 
 
-1. Set up your Editor for BASIC Programming
+1. Set up your editor for BASIC programming
 -------------------------------------------
-There are currently 3 Plugins, which enables Syntax Highlighting in various Editors:
+There are currently 3 plugins, which enable syntax highlighting in various editors:
 
 Atom - https://atom.io/packages/language-thbasic
 Sublime Text 3 - https://github.com/thunderpoot/telebasic-sublime-syntax
