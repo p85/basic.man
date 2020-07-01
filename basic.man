@@ -56,10 +56,11 @@ Changelog
 30.06.2020
  - Added Comparing/Logical Operators
 01.07.2020
- - Added Section Set up your Editor for BASIC Programming
+ - Added section Set Up Your Editor for BASIC Programming
+ - Added section ANSI Escape Sequences
 
 
-1. Set up your Editor for BASIC Programming
+1. Set Up Your Editor for BASIC Programming
 2. Comparing/Logical Operators
 3. Variables and Data Types
 4. Array Variables
@@ -69,9 +70,9 @@ Changelog
 8. COMM.EXE Basic Programs
 
 
-1. Set up your editor for BASIC programming
+1. Set Up Your Editor for BASIC Programming
 -------------------------------------------
-There are currently 3 user-written plugins, which enable syntax highlighting in various editors:
+There are currently 3 user-written plugins, which enable syntax-highlighting in various editors:
 
 Atom - https://atom.io/packages/language-thbasic
 Sublime Text 3 - https://github.com/thunderpoot/telebasic-sublime-syntax
@@ -80,22 +81,22 @@ Visual Studio Code - https://marketplace.visualstudio.com/items?itemName=vscode-
 
 2.a Comparing Operators (for use with IF)
 -----------------------------------------
-=   equal
+=   equal to
 10 A% = 0 : IF A% = 0 THEN PRINT "It is equal!"
 
 >   greater than
 10 A% = 5 : IF A% > 0 THEN PRINT "It is greater!"
 
->=  greater or equal
+>=  greater than or equal to
 10 A% = 0 : IF A% >= 0 THEN PRINT "It is greater or equal!"
 
-<   lesser
-10 A% = -1 : IF A% < 0 THEN PRINT "It is lesser!"
+<   less than
+10 A% = -1 : IF A% < 0 THEN PRINT "It is less!"
 
-<=  less or equal
-10 A% = 0 : IF A% <= 0 THEN PRINT "It is lesser or equal!"
+<=  less than or equal to
+10 A% = 0 : IF A% <= 0 THEN PRINT "It is less or equal!"
 
-<>  not equal
+<>  not equal to
 10 A% = 1 : IF A% <> 0 THEN PRINT "It is not equal!"
 
 
@@ -104,16 +105,16 @@ Visual Studio Code - https://marketplace.visualstudio.com/items?itemName=vscode-
 AND  Bitwise AND Operation
 10 PRINT 5 AND 1
 
-AND  Using within IF to check if both Conditions are truthy
+AND  Using within IF to check if both conditions are true
 10 A% = 3 : B% = 5
-20 IF A% = 3 AND B% = 5 THEN PRINT "Both Conditions are true"
+20 IF A% = 3 AND B% = 5 THEN PRINT "Both conditions are true"
 
 OR   Bitwise OR Operation
 10 PRINT 5 OR 1
 
-OR   Using within IF to check if one Condition is truthy
+OR   Using within IF to check if one condition is truthy
 10 A% = 3 : B% = 5
-20 IF A% = 3 OR B% = 5 THEN PRINT "Atleast one condition is true"
+20 IF A% = 3 OR B% = 5 THEN PRINT "At least one condition is true"
 
 NOT  Negation
 10 PRINT NOT 0
@@ -122,7 +123,7 @@ NOT  Negation
 3. Variables and Data Types
 ---------------------------
 You can store either Text or Numerical Values in Variables. 
-Variablenames can contain Letters and Digits, but they have to Start with a Letter. 
+Variable names can contain Letters and Digits, but they have to Start with a Letter.
 You cannot use Reserved Keywords (e.g. FOR, IF) as Variablenames.
 Variablenames can be suffixed with a Type Definition Character:
  - $ represents a Text (String) Value
@@ -376,8 +377,8 @@ val       - returns the numerical value of the specified string value
 
  DEF FNname(Argument) = Expression
  ---------------------------------------
- define a function with the Name 'FNname' which accept an 'Argument' and returns the defined expression. Function name
- must always begin with FN.
+ define a function with the Name 'FNname' which accepts an 'Argument' and returns the defined expression. 
+ The function name must always begin with FN.
 
  10 DEF FN square(x)=x^2
  20 DEF FNcube(x) = x^3
@@ -679,7 +680,7 @@ val       - returns the numerical value of the specified string value
 
  PORT%
  -----
- returns the Port from the current logged in User
+ returns the Port from the currently logged in user
 
  10 PRINT USER$ + " is logged in on port: " + STR$(PORT%)
 
@@ -988,7 +989,6 @@ val       - returns the numerical value of the specified string value
   12345
 
 
-
  7. How to...
  ------------
 
@@ -999,7 +999,6 @@ val       - returns the numerical value of the specified string value
     PRINT XOR(5, 361)
      364
 
-
  Q: How do i read from a file?
  A: 10 OPEN "filename.txt", AS #1
     20 IF EOF(1) = -1 THEN GOTO 60
@@ -1008,13 +1007,11 @@ val       - returns the numerical value of the specified string value
     50 GOTO 20
     60 CLOSE #1
 
-
  Q: How do i write into a file?
  A: 10 OPEN "filename.txt", AS #1
     20 PRINT# 1, "Hello World!"
     30 CLOSE #1
     Note: this will always OVERWRITE the file
-
 
  Q: How do i APPEND into a file?
  A: Basically, you have to open the file and put the filepointer at the end of file. To do so:
@@ -1024,7 +1021,6 @@ val       - returns the numerical value of the specified string value
     40 GOTO 20
     50 PRINT# 1, "We are now at the End of File and appending stuff"
     60 CLOSE #1
-
 
  Q: How do i split a string into an Array?
  A: You need to iterate through your String (YOURSTRING) and look for a delimiter (DELIMITER). 
@@ -1055,13 +1051,11 @@ val       - returns the numerical value of the specified string value
    230  TSTR = ""
    240  GOTO 160
 
-
  Q: How do i generate a Random Number?
  A: 10 RANDOMIZE TIMER
     20 MAXNR = 10
     20 RNR = INT(RND(1)*MAXNR)
     30 PRINT RNR
-
 
  Q: I would like to Code in BASIC, but all those Line Numbers are messy!
  A: I've made a Script which allows you, to code without Line Numbers and use Labels for GOTO/GOSUB
@@ -1087,7 +1081,6 @@ val       - returns the numerical value of the specified string value
  100 OPEN "COM1:9600", AS #1
  110 SLEEP 0.1
 
-
  Q: How do i accept an incoming Call?
  A: You have to read the Buffer and watch for a "RING" (Note: you have to strip a \n at the end of Buffer)
     Then you should send "ATA". You are connected now.
@@ -1105,10 +1098,8 @@ val       - returns the numerical value of the specified string value
     160 PRINT# 1, "ATA"
     170 REM You are now connected, put Program Logic here
 
-
  Q: How do i read input and disconnect if the User is idle for more than n seconds?
  A: We have set in the TMO Variable a Timeout in seconds. The CT Variable will hold our Current Timer Value.
-
 
     (I Assume you have the Basic Template & the Incoming Call part)
     195 REM Show an Prompt
@@ -1131,3 +1122,88 @@ val       - returns the numerical value of the specified string value
     305 REM Reset the Current Timer (CT)
     310 CT = 0
     315 REM The entered User Value is now in INP
+
+
+ 9. ANSI Escape Sequences
+ ------------------------
+
+ An ANSI escape sequence is a sequence of ASCII characters, the first two of which are the ASCII "Escape" character 27 [chr$(27)] 
+ and the left-bracket character "[" [chr$(91)]. The character or characters following the escape and left-bracket characters specify 
+ an alphanumeric code that controls a keyboard or display function.
+
+ For example, these can be used instead of, or in addition to LOCATE (for locating the cursor in the window); COLOR (for setting 
+ text and background colors.) and getting the user's arrow-key input. 
+ Using escape sequences can give you greater control over how your program displays its output.
+ Be aware that not all terminal types support some of these sequences, and your terminal must support 256-bit colors in order to 
+ display those properly.
+
+
+ Character attributes:
+ ---------------------
+
+ Esc[0m             Turn off character attributes
+ Esc[1m             Turn bold mode on
+ Esc[2m             Turn low intensity mode on
+ Esc[4m             Turn underline mode on
+ Esc[5m             Turn blinking mode on
+ Esc[7m             Turn reverse video on
+ Esc[8m             Turn invisible text mode on
+
+
+ Move the cursor or scroll the window:
+ -------------------------------------
+
+ Esc[ValueA         Move cursor up n lines
+ Esc[ValueB         Move cursor down n lines
+ Esc[ValueC         Move cursor right n lines
+ Esc[ValueD         Move cursor left n lines
+ Esc[H              Move cursor to upper left corner
+ Esc[;H             Move cursor to upper left corner
+ Esc[Line;ColumnH   Move cursor to screen location v,h
+ Esc[f              Move cursor to upper left corner
+ Esc[;f             Move cursor to upper left corner
+ Esc[Line;Columnf   Move cursor to screen location v,h
+ EscD               Move/scroll window up one line
+ EscM               Move/scroll window down one line
+ EscE               Move to next line 
+
+
+ Show or hide the cursor:
+ ------------------------
+
+ Esc[?25h           Show cursor
+ Esc[?25l           Hide cursor
+
+
+ Colors:
+ -------
+
+ Esc[38;5;⟨n⟩m Select foreground color
+ Esc[48;5;⟨n⟩m Select background color
+
+      0 - 7:  standard colors (as in ESC [ 30–37 m)
+     8 - 15:  high intensity colors (as in ESC [ 90–97 m)
+   16 - 231:  6 × 6 × 6 cube (216 colors): 16 + 36 × r + 6 × g + b (0 ≤ r, g, b ≤ 5)
+  232 - 255:  grayscale from black to white in 24 steps
+
+
+ Color Examples:
+ ---------------
+ 
+ 10 PRINT CHR$(27) + "[38;5;2mThe foreground is green"
+ 20 PRINT CHR$(27) + "[48;5;9mThe background is red"
+ 30 PRINT CHR$(27) + "[HThis will appear on line 1, starting in position 1."
+
+ Get arrow key input:
+ --------------------
+
+ 10 KEY$ = INKEY$
+ 20 IF KEY$ = CHR$(27) THEN KEY$ = INKEY$ : IF KEY$ = "[" THEN GOTO 40
+ 30 GOTO 10
+ 40 KEY$ = INKEY$
+ 50 IF KEY$ = "A" THEN PRINT "UP"
+ 60 IF KEY$ = "B" THEN PRINT "DOWN"
+ 70 IF KEY$ = "C" THEN PRINT "RIGHT"
+ 80 IF KEY$ = "D" THEN PRINT "LEFT"
+ 90 GOTO 10
+
