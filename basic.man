@@ -115,7 +115,7 @@ AND  Using within IF to check if both conditions are true
 OR   Bitwise OR Operation
 10 PRINT 5 OR 1
 
-OR   Using within IF to check if one condition is truthy
+OR   Using within IF to check if one condition is true
 10 A% = 3 : B% = 5
 20 IF A% = 3 OR B% = 5 THEN PRINT "At least one condition is true"
 
