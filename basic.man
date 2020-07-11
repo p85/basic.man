@@ -60,6 +60,7 @@ Changelog
  - Added section ANSI Escape Sequences
 11.07.2020
  - Added ON, CALL Commands
+ - Added various Commands which are not implemented right now and act as no operation
 
 
 1. Set Up Your Editor for BASIC Programming
@@ -152,6 +153,7 @@ Now we can modify the 5th Entry (note that the Array Index usually starts at 0, 
 -----------------------
 
 abs       - returns the absolute value of the specified value
+access    - currently not implemented, does nothing
 arg$      - variable containing argumnets passed to program on command line
 argc%     - variable containing the number of arguments passed to the program
 argv$     - an array containing all of the arguments passed to the program
@@ -160,9 +162,10 @@ atn       - returns the arctangent of the specified value
 beep      - sends a bell
 bin$      - returns the binary representation of an integer as a string
 brk       - sets and returns status of BREAK key
-call      - no operation
+call      - currently not implemented, does nothing
 chr$      - convert an ASCII-Code to its equivalent character
 cint      - returns the nearest integer of the specified value (9.5 becomes 10)
+circle    - currently not implemented, does nothing
 clear     - clears all variables and closes all open files
 close     - close the file and save it/create if it doesn't exist
 cls       - clears the screen
@@ -172,12 +175,14 @@ csng      - convert a specified value to a single precision number
 data      - store the numeric and string constants that are accessed by the program READ statements
 date$     - returns the current date
 def fn    - defines a function
-defdbl    - declare a variable as double precision number
-defint    - declare a variable as integer number
-defsng    - declare a variable as single precision number 
-defstr    - declare a variable as string
+defdbl    - declare a variable as double precision number (currently not implemented, does nothing)
+defint    - declare a variable as integer number (currently not implemented, does nothing)
+defsng    - declare a variable as single precision number  (currently not implemented, does nothing)
+defstr    - declare a variable as string (currently not implemented, does nothing)
 dim       - define an array of a fixed size
 dir$      - returns the filenames in your local directory, separated by spaces
+do        . currently not implemented, does nothing
+draw      - currently not implemented, does nothing
 end       - ends the current program
 exp       - returns the base of natural logarithms to the power of the specified value
 for       - execute a series of instructions a specified number of times in a loop
@@ -207,15 +212,17 @@ num       - returns the ASCII-Code for its equivalent character
 oct$      - returns a octal value of a specific value
 open      - opens a file
 on        - jump conditionally to GOTO/GOSUB, based on value given
-pclear0   - reserves one page of memory (no effect)
-pclear1   - reserves two pages of memory (no effect)
+pclear0   - reserves one page of memory (currently not implemented, does nothing)
+pclear1   - reserves two pages of memory (currently not implemented, does nothing)
 peek      - read a value from the specified memory location
-pmode0    - selects a resolution and first memory page of a low resolution graphic screen. (0 - 128 x 96, 2 colour) (no effect)
+play      - currently not implemented, does nothing
+pmode0    - selects a resolution and first memory page of a low resolution graphic screen. (0 - 128 x 96, 2 colour) (currently not implemented, does nothing)
 poke      - write a byte of data into the specified memory location
 polkey$   - returns one character read from the terminal. when no key is hit within a given time (in seconds), it returns an empty string
 port%     - returns the currently logged in port number
 pos       - returns the character position in string 1, where the first occurrence of string 2 was found
 print     - prints a expression on the screen
+put       - currently not implemented, does nothing
 r2d       - converts radians to degrees
 randomize - reseed the random number generator
 read      - read a value from DATA and assign them to variables
@@ -227,9 +234,12 @@ return    - return from a subroutine
 right$    - returns the rightmost Number(n) characters of the specified String
 rnd       - returns a random number between 0 and 1
 run       - execute the program in memory
+screen    - currently not implemented, does nothing
 sgn       - returns the sign of the specified value
 sin       - returns the trigonometric sine of the specified value
 sleep     - pauses the program for a specified amount of seconds
+sound     - currently not implemented, does nothing
+soundrnd  - currently not implemented, does nothing
 space$    - returns a string of specified Number value of spaces
 spa       - returns a string of specified Number value of spaces
 spc$      - returns a string of specified Number value of spaces
@@ -264,6 +274,11 @@ val       - returns the numerical value of the specified string value
 
  PRINT ABS(-40)
   40
+
+
+ ACCESS
+ ------
+ currently not implemented, does nothing
 
 
  ASC(character), NUM(character)
@@ -330,9 +345,7 @@ val       - returns the numerical value of the specified string value
 
  CALL
  ----
- no operation (does nothing)
-
- 10 CALL
+ currently not implemented, does nothing
 
 
  CHR$(n)
@@ -349,6 +362,11 @@ val       - returns the numerical value of the specified string value
 
  PRINT CINT(5.7)
   6
+
+
+ CIRCLE
+ ------
+ currently not implemented, does nothing
 
 
  COLOR(a, b)
@@ -401,28 +419,28 @@ val       - returns the numerical value of the specified string value
 
  DEFDBL (variable)
  -----------------
- declare a variable as double precision number
+ declare a variable as double precision number (currently not implemented, does nothing)
 
  DEFDBL Variable
 
 
  DEFINT (Variable)
  -----------------
- declare a variable as integer number
+ declare a variable as integer number (currently not implemented, does nothing)
 
  DEFINT Variable
 
 
  DEFSNG (Variable)
  -----------------
- declare a variable as single precision number 
+ declare a variable as single precision number (currently not implemented, does nothing)
 
  DEFSNG Variable
 
 
  DEFSTR (Variable)
  -----------------
- declare a variable as string
+ declare a variable as string (currently not implemented, does nothing)
 
  DEFSTR Variable
 
@@ -440,6 +458,16 @@ val       - returns the numerical value of the specified string value
  returns the filenames in your local directory, separated by spaces
 
  PRINT DIR$
+
+
+ DO
+ --
+ currently not implemented, does nothing
+
+
+ DRAW
+ ----
+ currently not implemented, does nothing
 
 
  EXP (n)
@@ -676,15 +704,35 @@ val       - returns the numerical value of the specified string value
  200 PRINT "Goto 200, should jump here" : END
  300 PRINT "Goto 300, should NOT jump here" : END
 
- 
+
+ PCLEAR0
+ -------
+ currently not implemented, does nothing
+
+
+ PCLEAR1
+ -------
+ currently not implemented, does nothing
+
+
  PEEK(n)
  -------
  read a value from the specified memory location(n)
  
  10 PRINT PEEK(1300)
   83
- 
- 
+
+
+ PLAY
+ ----
+ currently not implemented, does nothing
+
+
+ PMODE0
+ ------
+ currently not implemented, does nothing
+
+
  POKE n, m
  ----------
  write a byte of data(m) into the specified memory location(n)
@@ -745,7 +793,12 @@ val       - returns the numerical value of the specified string value
  30 PRINT #1,1;END : REM Truncates file at record 1
  (notice the position of the # and the space in the different forms of file access)
  
- 
+
+ PUT
+ ---
+ currently not implemented, does nothing
+
+
  R2D(n)
  ------
  converts radians(n) to degrees
@@ -829,6 +882,11 @@ val       - returns the numerical value of the specified string value
   0.912
   2.376
  
+
+ SCREEN
+ ------
+ currently not implemented, does nothing
+ 
  
  SGN(n)
  ------
@@ -853,6 +911,16 @@ val       - returns the numerical value of the specified string value
  pauses the program for a specified amount of seconds(n)
  
  10 SLEEP 5
+
+
+ SOUND
+ -----
+ currently not implemented, does nothing
+
+
+ SOUNDRND
+ --------
+ currently not implemented, does nothing
 
 
  SPACE$(n), SPC$(n), SPA(n)
