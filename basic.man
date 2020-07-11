@@ -4,7 +4,7 @@ ___.                 .__
  | \_\ \/ __ \_\___ \|  \  \___ 
  |___  (____  /____  >__|\___  >
      \/     \/     \/        \/ 
-         Manual by archer (modified 01.07.2020)
+         Manual by archer (modified 11.07.2020)
 
 
 
@@ -58,6 +58,8 @@ Changelog
 01.07.2020
  - Added section Set Up Your Editor for BASIC Programming
  - Added section ANSI Escape Sequences
+11.07.2020
+ - Added ON, CALL Commands
 
 
 1. Set Up Your Editor for BASIC Programming
@@ -158,6 +160,7 @@ atn       - returns the arctangent of the specified value
 beep      - sends a bell
 bin$      - returns the binary representation of an integer as a string
 brk       - sets and returns status of BREAK key
+call      - no operation
 chr$      - convert an ASCII-Code to its equivalent character
 cint      - returns the nearest integer of the specified value (9.5 becomes 10)
 clear     - clears all variables and closes all open files
@@ -203,6 +206,7 @@ nint      - returns the nearest integer of the specified value (9.5 becomes 9)
 num       - returns the ASCII-Code for its equivalent character
 oct$      - returns a octal value of a specific value
 open      - opens a file
+on        - jump conditionally to GOTO/GOSUB, based on value given
 pclear0   - reserves one page of memory (no effect)
 pclear1   - reserves two pages of memory (no effect)
 peek      - read a value from the specified memory location
@@ -322,8 +326,15 @@ val       - returns the numerical value of the specified string value
  enables and disables the break key
 
  Y=BRK(0):REM break is disabled
-  
-  
+
+
+ CALL
+ ----
+ no operation (does nothing)
+
+ 10 CALL
+
+
  CHR$(n)
  -------
  convert an ASCII-Code (n) to its equivalent character
@@ -651,9 +662,20 @@ val       - returns the numerical value of the specified string value
  OPEN filename, AS fileNumber
  ----------------------------
  opens a file
- 
+
  10 OPEN "filename.txt", AS #1
- 
+
+
+ ON NUMBER%
+ ------------------------
+ jump conditionally to GOTO/GOSUB, based on value given
+
+ 10 NUMBER% = 2
+ 20 ON NUMBER% GOTO 100,200,300
+ 100 PRINT "Goto 100, should NOT jump here" : END
+ 200 PRINT "Goto 200, should jump here" : END
+ 300 PRINT "Goto 300, should NOT jump here" : END
+
  
  PEEK(n)
  -------
