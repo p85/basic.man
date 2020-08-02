@@ -243,7 +243,6 @@ soundrnd  - currently not implemented, does nothing
 space$    - returns a string of specified Number value of spaces
 spa       - returns a string of specified Number value of spaces
 spc$      - returns a string of specified Number value of spaces
-spa       - returns a string of specified Number value of spaces
 sqr       - returns the square root of the specified value
 sqrt      - returns the square root of the specified value
 stop      - halts the program and returns to the basic interpreter
@@ -1085,9 +1084,9 @@ val       - returns the numerical value of the specified string value
 
  Q: I need a XOR Function, but there is none.
  A: Create the Function with:
-    DEF XOR(Value1, Value2) = (Value1 OR Value2) - (Value1 AND Value2)
+    DEF FNXOR(Value1, Value2) = (Value1 OR Value2) - (Value1 AND Value2)
     Now you can call it with:
-    PRINT XOR(5, 361)
+    PRINT FNXOR(5, 361)
      364
 
  Q: How do i read from a file?
