@@ -61,6 +61,14 @@ Changelog
 11.07.2020
  - Added ON, CALL Commands
  - Added various Commands which are not implemented right now and act as no operation
+21.11.2020
+ - Added the following TH_ function definitions:
+ - TH_SYSLEVEL
+ - TH_HASBADGE(badge$)
+ - TH_HASLOGIN(host$)
+ - TH_HASROOT(host$)
+ - TH_DEFGROUP$
+ - TH_PLAN$
 
 
 1. Set Up Your Editor for BASIC Programming
@@ -262,6 +270,16 @@ ups$      - returns the uppercase value of the given string
 user$     - returns the current logged in user
 width     - returns your terminal width
 val       - returns the numerical value of the specified string value
+
+TH_ language extentions:
+------------------------
+
+th_syslevel               - returns the user's Telehack system level (int)
+th_hasbadge(badge$)       - returns a UNIX timestamp of when the user earned badge$, or 0 (int)
+th_haslogin(host$)        - 1 if the user has login on host$, else 0 (int)
+th_hasroot(host$)         - 1 if the user has login on host$, else 0 (int)
+th_defgroup$              - returns the user's defgroup, separated by spaces
+th_plan$                  - returns the user's .plan as a string
 
 
 6. Detailed overview of Commands
@@ -976,6 +994,63 @@ val       - returns the numerical value of the specified string value
  10 PRINT TAN(38)
   0.310
 
+
+ TH_SYSLEVEL
+ -----------
+ returns the user's Telehack system level
+ 
+ 10 PRINT TH_SYSLEVEL
+  12
+
+
+ TH_HASBADGE(badge$)
+ -------------------
+ returns a UNIX timestamp of when the user earned badge$, or 0
+ 
+ 10 PRINT TH_HASBADGE("ACCT")
+  1559673339
+  
+ 10 PRINT TH_HASBADGE("POOTER")
+  0
+
+
+ TH_HASLOGIN(host$)
+ ------------------
+ 1 if the user has login on host$, else 0
+ 
+ 10 PRINT TH_HASLOGIN("mimsy")
+  1
+  
+ 10 PRINT TH_HASLOGIN("ames")
+  0
+
+ TH_HASROOT(host$)
+ -----------------
+ 1 if the user has root on host$, else 0
+ 
+ 10 PRINT TH_HASROOT("mimsy")
+  1
+  
+ 10 PRINT TH_HASROOT("ames")
+  0
+
+
+ TH_DEFGROUP$
+ ------------
+ returns the user's defgroup, separated by spaces
+ 
+ 10 PRINT TH_DEFGROUP$
+  archer lorelei
+
+
+ TH_PLAN$
+ --------
+ returns the user's .plan as a string
+ 
+ 10 PRINT TH_PLAN$
+   To write a BASIC program
+    <3
+   
 
  TIM(n)
  -----
