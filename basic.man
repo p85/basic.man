@@ -4,7 +4,7 @@ ___.                 .__
  | \_\ \/ __ \_\___ \|  \  \___ 
  |___  (____  /____  >__|\___  >
      \/     \/     \/        \/ 
-         Manual by archer (modified 11.07.2020)
+         Manual by archer (modified 10.12.2020)
 
 
 
@@ -69,6 +69,13 @@ Changelog
  - TH_HASROOT(host$)
  - TH_DEFGROUP$
  - TH_PLAN$
+
+10.12.2020
+ - Added TH_TIME
+ - Added TH_LOCALTIME$([OPTION],[TIMESTAMP])
+ - Added TH_GMTIME$([OPTION],[TIMESTAMP])
+ - Added TH_LOCALTIME([OPTION],[TIMESTAMP])
+ - Added TH_GMTIME([OPTION],[TIMESTAMP])
 
 
 1. Set Up Your Editor for BASIC Programming
@@ -280,6 +287,8 @@ th_haslogin(host$)        - 1 if the user has login on host$, else 0 (int)
 th_hasroot(host$)         - 1 if the user has login on host$, else 0 (int)
 th_defgroup$              - returns the user's defgroup, separated by spaces
 th_plan$                  - returns the user's .plan as a string
+th_localtime$             - returns the human-readable local time for a unix timestamp
+th_gmtime$                - returns the human-readable UTC time for a unix timestamp
 
 
 6. Detailed overview of Commands
@@ -1051,6 +1060,48 @@ th_plan$                  - returns the user's .plan as a string
    To write a BASIC program
     <3
    
+
+ TH_TIME
+ -------
+ Returns the current UNIX timestamp
+
+
+ TH_LOCALTIME[$]
+ ---------------
+ Returns a human-readable local time for the given unix timestamp.
+
+ 10 PRINT TH_LOCALTIME$(TH_TIME)
+  Wednesday, December 9, 2020 6:40:49 PM PST
+
+ Returns values of time and date if options are supplied, and no sigil:
+
+ 0 - sec
+ 1 - min
+ 2 - hour
+ 3 - mday
+ 4 - mon
+ 5 - year
+ 6 - wday
+ 7 - yday
+ 8 - isdst
+
+ 10 FOR I = 0 TO 8 : PRINT TH_LOCALTIME(I,0) : NEXT I
+  0
+  0
+  16
+  31
+  11
+  69
+  3
+  364
+  0
+
+
+ TH_GMTIME[$]
+ ------------
+ Returns a human-readable UTC time for the given unix timestamp
+ with the same options as TH_LOCALTIME[$]
+
 
  TIM(n)
  -----
