@@ -4,8 +4,7 @@ ___.                 .__
  | \_\ \/ __ \_\___ \|  \  \___ 
  |___  (____  /____  >__|\___  >
      \/     \/     \/        \/ 
-         Manual by archer (modified 10.12.2020)
-
+         Manual by archer (modified 04.01.2021)
 
 
 Changelog
@@ -69,14 +68,25 @@ Changelog
  - TH_HASROOT(host$)
  - TH_DEFGROUP$
  - TH_PLAN$
-
 10.12.2020
  - Added TH_TIME
  - Added TH_LOCALTIME$([OPTION],[TIMESTAMP])
  - Added TH_GMTIME$([OPTION],[TIMESTAMP])
  - Added TH_LOCALTIME([OPTION],[TIMESTAMP])
  - Added TH_GMTIME([OPTION],[TIMESTAMP])
+30.12.2020
+ - Added TH_EXEC
+ - Added TH_MODEM$
+ - Added TH_HOSTNAME$
+ - Added TH_NETSTAT$
+ - Added TH_MD5HEX$
+ - Added TH_MD5BASE64$
+04.01.2021
+ - Extended TH_EXEC capability
 
+
+Table of Contents
+-----------------
 
 1. Set Up Your Editor for BASIC Programming
 2. Comparing/Logical Operators
@@ -289,6 +299,13 @@ th_defgroup$              - returns the user's defgroup, separated by spaces
 th_plan$                  - returns the user's .plan as a string
 th_localtime$             - returns the human-readable local time for a unix timestamp
 th_gmtime$                - returns the human-readable UTC time for a unix timestamp
+th_modem$                 - returns the modem number or hosted filename
+th_hostname$              - returns current hostname or hostname of argument passed
+th_netstat$               - returns current netstat or netstat of argument passed
+th_md5hex$                - returns md5 hex of argument passed as hex
+th_md5base64$             - returns md5 hex of argument passed as base64
+th_exec                   - executes a shell command and returns to the current basic program
+                          - optionally assign the stdout to a variable
 
 
 6. Detailed overview of Commands
@@ -622,7 +639,8 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  LEFT$(String, Number)
  ---------------------
  returns a string that comprises the left-most specified number characters of a specified string
- 
+
+
  10 A$ = "Hello World"
  20 B$ = LEFT$(A$, 5)
  30 PRINT B$
@@ -632,16 +650,18 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  LEN(String)
  -----------
  returns the number of characters in the specified string
- 
+
+
  10 A$ = "Hello World"
  20 PRINT LEN(A$)
   11
- 
- 
+
+
  LET Variable = Value
  --------------------
  assigns a value to a variable
- 
+
+
  10 LET A = 12345
  20 PRINT A
   12345
@@ -660,39 +680,44 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  LOCATE y, x
  -----------
  change the cursors position to y, x
- 
+
+
  10 LOCATE 5, 5
- 
- 
+
+
  LOG(n)
  ------
  returns the natural logarithm of the specified value(n)
- 
+
+
  10 PRINT LOG(6)
   1.792
- 
- 
+
+
  LOG10(n)
  --------
  returns the natural logarithm of the specified value(n) (Base 10)
- 
+
+
  10 PRINT LOG10(6)
   0.778
- 
- 
+
+
  MID$(String, n, [l])
  --------------------
  returns a string of l characters from String beginning with the n Character
- 
+
+
  10 A$ = "Hello World"
  20 PRINT MID$(A$,3,3)
   llo
- 
- 
+
+
  NINT(n)
  -------
  returns the nearest integer of the specified value (9.5 becomes 9)
- 
+
+
  10 PRINT NINT(5.6)
   6
 
@@ -708,11 +733,12 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  OCT$(n)
  -------
  returns a octal value of the specified value(n)
- 
+
+
  10 PRINT OCT$(66)
   102
- 
- 
+
+
  OPEN filename, AS fileNumber
  ----------------------------
  opens a file
@@ -744,7 +770,8 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  PEEK(n)
  -------
  read a value from the specified memory location(n)
- 
+
+
  10 PRINT PEEK(1300)
   83
 
@@ -762,10 +789,11 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  POKE n, m
  ----------
  write a byte of data(m) into the specified memory location(n)
- 
+
+
  10 POKE 1300, 255
- 
- 
+
+
  POLKEY$
  -------
  returns one character read from the terminal. when no key is hit within a given time (in seconds), it returns an empty string
@@ -789,36 +817,40 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  10 A$="ABCDE"
  20 PRINT POS(A$,"CD")
    3
- 
- 
+
+
  PRINT expression
  PRINT# fileNumber, expression
  PRINT #fileNumber[,recordNumber]; expression
  PRINT #fileNumber[,recordNumber];END
- ----------------
+ --------------------------------------------
  prints a expression on the screen
  prints a expression into an open file
  prints an EOF mark to a file, truncating the file at that record
- 
+ ( '&' and '?' are available aliases for PRINT )
+
+
  10 A = 5
  20 B = 10
  30 PRINT A + B
   15
- 
+
+
  10 A$ = "Hello "
  20 B$ = "World"
  30 PRINT A$;
  40 PRINT B$
   Hello World
  (Adding a ; at the end of PRINT does not create a newline)
- 
+
+
  10 PRINT# 1, "Iam writing into a file"
 
  10 PRINT #1;A$
  20 PRINT #1,1;"Overwriting A$ in record 1"
  30 PRINT #1,1;END : REM Truncates file at record 1
  (notice the position of the # and the space in the different forms of file access)
- 
+
 
  PUT
  ---
@@ -828,16 +860,18 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  R2D(n)
  ------
  converts radians(n) to degrees
- 
+
+
  10 PRINT R2D(1.2)
   68.755
- 
- 
+
+
  READ n...
  READ #fileNumber[,recordNumber];variables
  ----
  read a value from DATA or a file and assign them to variables
- 
+
+
  10 DATA 4.1, 5.6, 9.98
  20 READ A, B, C
  30 PRINT A, B, C
@@ -875,7 +909,8 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  RESTORE
  -------
  allow DATA statements to be reread
- 
+
+
  10 DATA 4.1, 5.6, 9.98
  20 READ A, B, C
  30 PRINT A, B, C
@@ -884,36 +919,38 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  50 READ A, B, C
  60 PRINT A, B, C
   4.100          5.600          9.980
- 
- 
+
+
  RIGHT$(String, n)
  -----------------
  returns the rightmost Number(n) characters of the specified String
- 
+
+
  10 A$ = "Hello World"
  20 PRINT RIGHT$(A$, 5)
   World
- 
- 
+
+
  RND(n)
  ------
  if n < 0, returns a random number in the interval [0, 1) seeded by INT(n)
  if n = 0, returns a random number in the interval [0, 1)
  if n > 0, returns a random number in the interval [0, INT(n))
- 
+
+
  10 PRINT RND(-5)
  20 PRINT RND(0)
  30 PRINT RND(5)
   0.249
   0.912
   2.376
- 
+
 
  SCREEN
  ------
  currently not implemented, does nothing
- 
- 
+
+
  SGN(n)
  ------
  returns the sign of the specified value(n)
@@ -923,19 +960,20 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
   1
   0
   -1
- 
- 
+
+
  SIN(n)
  ------
  returns the trigonometric sine of the specified value(n) in radians
  10 PRINT SIN(36)
   -0.991778853443116
- 
- 
+
+
  SLEEP n
  -------
  pauses the program for a specified amount of seconds(n)
- 
+
+
  10 SLEEP 5
 
 
@@ -979,7 +1017,6 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
   12345
 
 
- 
  STRING$(n, string)
  ------------------
  repeats a string n times
@@ -991,11 +1028,12 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  TAB(n), TAB$(n)
  ----------------
  returns the specified amount of spaces(n)
- 
+
+
  10 PRINT "ABC" TAB$(10) "ABC"
   abc          abc
- 
- 
+
+
  TAN(n)
  ------
  returns the trigonometric tangent of the specified value(n) in radians
@@ -1007,7 +1045,8 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  TH_SYSLEVEL
  -----------
  returns the user's Telehack system level
- 
+
+
  10 PRINT TH_SYSLEVEL
   12
 
@@ -1015,10 +1054,12 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  TH_HASBADGE(badge$)
  -------------------
  returns a UNIX timestamp of when the user earned badge$, or 0
- 
+
+
  10 PRINT TH_HASBADGE("ACCT")
   1559673339
-  
+
+
  10 PRINT TH_HASBADGE("POOTER")
   0
 
@@ -1026,20 +1067,24 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  TH_HASLOGIN(host$)
  ------------------
  1 if the user has login on host$, else 0
- 
+
+
  10 PRINT TH_HASLOGIN("mimsy")
   1
-  
+
+
  10 PRINT TH_HASLOGIN("ames")
   0
 
  TH_HASROOT(host$)
  -----------------
  1 if the user has root on host$, else 0
- 
+
+
  10 PRINT TH_HASROOT("mimsy")
   1
-  
+
+
  10 PRINT TH_HASROOT("ames")
   0
 
@@ -1047,7 +1092,8 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  TH_DEFGROUP$
  ------------
  returns the user's defgroup, separated by spaces
- 
+
+
  10 PRINT TH_DEFGROUP$
   archer lorelei
 
@@ -1055,11 +1101,12 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  TH_PLAN$
  --------
  returns the user's .plan as a string
- 
+
+
  10 PRINT TH_PLAN$
    To write a BASIC program
     <3
-   
+
 
  TH_TIME
  -------
@@ -1103,10 +1150,67 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  with the same options as TH_LOCALTIME[$]
 
 
+ TH_MODEM$
+ -------------
+ returns the modem number or hosted filename depending on the option passed
+
+ 0 - number
+ 1 - filename
+
+
+ TH_HOSTNAME$
+ -------------
+ returns current hostname or hostname of argument passed.  Supports OSPROBER plugin.
+
+
+ >PRINT TH_HOSTNAME$
+  telehack
+
+
+ TH_NETSTAT$
+ -------------
+ returns current netstat or netstat of argument passed separated by spaces
+
+
+ TH_MD5HEX$
+ -------------
+ returns md5 hex of argument passed as hex
+
+
+ >PRINT TH_MD5HEX$("FOO")
+  901890a8e9c8cf6d5a1a542b229febff
+
+
+ TH_MD5BASE64$
+ -------------
+ returns md5 hex of argument passed as base64
+
+ >PRINT TH_MD5BASE64$("FOO")
+  kBiQqOnIz21aGlQrIp/r/w
+
+
+ TH_EXEC 
+ -------------
+ executes a shell command and returns to the current basic program
+
+ >TH_EXEC "echo foo" : TH_EXEC "echo bar"
+ foo
+ bar 
+
+ >TH_EXEC "fnord", OUT$ : PRINT OUT$
+ The iguana from Austin will go to Austin.
+
+ >
+
+ Note that variables assigned with TH_EXEC will have trailing CR LF
+ characters, much like `` in shell scripts.
+
+
  TIM(n)
  -----
  returns values of time and date depending on n
- 
+
+
  0 - current minute (0-59)
  1 - current hour (0-23)
  2 - current day (1-366)
@@ -1142,7 +1246,7 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
  2 for string data
  3 for end of file/data
 
- 
+
  10  REM CREATE A FILE FOR TESTING
  20  FILENAME$ = "TEST" + STR$(INT(RND(1)*128*2)) + ".TXT"
  30  OPEN FILENAME$, AS #1
@@ -1405,7 +1509,8 @@ th_gmtime$                - returns the human-readable UTC time for a unix times
 
  Color Examples:
  ---------------
- 
+
+
  10 PRINT CHR$(27) + "[38;5;2mThe foreground is green"
  20 PRINT CHR$(27) + "[48;5;9mThe background is red"
  30 PRINT CHR$(27) + "[HThis will appear on line 1, starting in position 1."
