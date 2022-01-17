@@ -83,6 +83,8 @@ Changelog
  - Added TH_MD5BASE64$
 04.01.2021
  - Extended TH_EXEC capability
+ 01.16.2022
+ - Added TH_REV$
 
 
 Table of Contents
@@ -306,6 +308,7 @@ th_md5hex$                - returns md5 hex of argument passed as hex
 th_md5base64$             - returns md5 hex of argument passed as base64
 th_exec                   - executes a shell command and returns to the current basic program
                           - optionally assign the stdout to a variable
+th_rev$                   - reverses a string
 
 
 6. Detailed overview of Commands
@@ -1204,6 +1207,13 @@ th_exec                   - executes a shell command and returns to the current 
 
  Note that variables assigned with TH_EXEC will have trailing CR LF
  characters, much like `` in shell scripts.
+ 
+ TH_REV$
+ -------------
+ reverses a string
+ 
+ >PRINT TH_REV$("1234")
+ 4321
 
 
  TIM(n)
